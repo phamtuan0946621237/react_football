@@ -1,0 +1,6 @@
+module Pods_Football_reactnative_Football_reactnativeTests {
+  umbrella header "Pods-Football_reactnative-Football_reactnativeTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
