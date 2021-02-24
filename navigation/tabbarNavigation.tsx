@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import MatchPage from '../module/container/matchPage'
-import MacthStack from './MacthRoute'
+import MacthStack from './navigation'
 const TabbarNavigation = () => {
 
     function SettingsScreen() {
@@ -18,8 +18,8 @@ const TabbarNavigation = () => {
     return (
         <NavigationContainer>
             <BottomTab.Navigator>
-                <BottomTab.Screen name="MacthStack" component={MacthStack} />
-                <BottomTab.Screen name="Settings" component={SettingsScreen} />
+                <BottomTab.Screen name="MacthStack" component={MacthStack} options={{title : "Match"}}/>
+                <BottomTab.Screen name="Settings" component={SettingsScreen} options={{title : "League"}}/>
             </BottomTab.Navigator>
         </NavigationContainer>
     )

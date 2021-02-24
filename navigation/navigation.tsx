@@ -1,6 +1,6 @@
 import { createStackNavigator,StackNavigationOptions } from '@react-navigation/stack';
 import React from 'react'
-import MatchPage from '../module/container/matchPage'
+import MatchPage from '../module/container/MatchPage'
 import LeaguePage from '../module/container/LeaguePage'
 import {Platform} from 'react-native'
 const Stack = createStackNavigator();
@@ -13,8 +13,9 @@ function MacthStack() {
   return (
     <Stack.Navigator 
     screenOptions={ScreenOptions}
+    initialRouteName={matchRoute}
     >
-      <Stack.Screen key={matchRoute} name={matchRoute} component={MatchPage} options={{title : "Match"}}/>
+      <Stack.Screen  key={matchRoute} name={matchRoute} component={MatchPage} options={{title : "Match"}}/>
       <Stack.Screen key={leagueRoute} name={leagueRoute} component={LeaguePage} options={{title : "League"}}/>
     </Stack.Navigator>
   );
@@ -30,18 +31,16 @@ export const ScreenOptions: StackNavigationOptions = {
     headerTitleStyle: {
       paddingHorizontal: 16
     },
+    // headerBackground : 'white',
     headerLeftContainerStyle: {
       paddingHorizontal: Platform.OS == 'ios' ? 16 : 0,
     },
     headerRightContainerStyle: {
       paddingHorizontal: 16,
     },
-    // headerBackImage: () => (
-    //   <Image source={BackWhiteIcon} style={AppStyles.icon24} />
-    // ),
-    // headerBackground: () => <CommonGradient style={{ flex: 1 }} />,
+    
     headerStyle: {
-      backgroundColor: 'transparent',
+      backgroundColor: 'white',
       shadowColor: 'transparent',
       elevation: 0,
     },
