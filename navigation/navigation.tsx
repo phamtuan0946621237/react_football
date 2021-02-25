@@ -2,11 +2,13 @@ import { createStackNavigator,StackNavigationOptions } from '@react-navigation/s
 import React from 'react'
 import MatchPage from '../module/container/MatchPage'
 import LeaguePage from '../module/container/LeaguePage'
+import MatchDetailPage from '../module/container/MatchDetailPage'
 import {Platform} from 'react-native'
 const Stack = createStackNavigator();
 
 
 export const matchRoute = 'MatchRoute';
+export const matchDetailRoute = 'MatchDetailRoute';
 export const leagueRoute = 'LeagueRoute';
 
 function MacthStack() {
@@ -17,6 +19,7 @@ function MacthStack() {
     >
       <Stack.Screen  key={matchRoute} name={matchRoute} component={MatchPage} options={{title : "Match"}}/>
       <Stack.Screen key={leagueRoute} name={leagueRoute} component={LeaguePage} options={{title : "League"}}/>
+      <Stack.Screen key={matchDetailRoute} name={matchDetailRoute} component={MatchDetailPage} options={{title : "Match Detail"}}/>
     </Stack.Navigator>
   );
 }

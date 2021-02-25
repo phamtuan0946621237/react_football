@@ -1,10 +1,12 @@
 import {
     DEFAULT,
     MATCH_COMPLETE,
+    MATCH_DETAIL_COMPLETE
 } from "../constants/match";
 
 const initialState = {
     matchResponse: undefined,
+    matchDetailResponse : undefined
 }
 
  const matchReducers = (state = initialState, action: any) => {
@@ -19,7 +21,13 @@ const initialState = {
                 ...state,
                 matchResponse: action.payload
             }
-        default:
+        
+        case MATCH_DETAIL_COMPLETE:
+            return {
+                ...state,
+                matchDetailResponse: action.payload
+            }
+            default:            
          break;
         
     }

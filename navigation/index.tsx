@@ -1,9 +1,9 @@
 
-import * as MacthRoute from './navigation';
+import * as Navigator from './navigation';
 import * as TabbarNavigation from './tabbarNavigation';
 
 
 export {
-  MacthRoute,
+  Navigator,
   TabbarNavigation
 };

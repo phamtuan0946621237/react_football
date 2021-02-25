@@ -3,13 +3,15 @@ import {
   Text,
   Image,
   View,
-  StyleSheet
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native';
 
 
 interface ListMatchComponent {
   items :  Array<ListMatchesItem>,
-  nameLeague : string
+  nameLeague ?: string,
+  onClick : (id : number) => void
 }
 
 interface ListMatchesItem {
@@ -37,28 +39,26 @@ interface StatusListMatchesItem {
 
 const ListMatchComponent = (props: ListMatchComponent) => {
 
-  function _buildMatchItem(nameHome : string,iconHome : number,result : string,awayNameClub : string,iconAway : number) {
+  function _buildMatchItem(nameHome : string,iconHome : number,result : string,awayNameClub : string,iconAway : number,_onClick : () => void) {
     return (
-      <View style={styles.itemMatch}>
-        {/* <View> */}
+      <TouchableOpacity style={styles.itemMatch} onPress={_onClick}>
           <View style={[styles.infoTeam,{justifyContent : "flex-end"}]}>
           <Text style={styles.infoHomeClub}>{nameHome}</Text>
             <Image style={{ width: 16, height: 16 }} source={{ uri: "https://www.fotmob.com/images/team/" + iconHome  }} />
           </View>
-        {/* </View> */}
-
         <View style={styles.resultMatch}>
           <Text>{result}</Text>
-          {/* <Text>{}</Text> */}
         </View>
-
         <View style={styles.infoTeam}>
         <Image style={{ width: 16, height: 16 }} source={{ uri: "https://www.fotmob.com/images/team/" + iconAway }} />
         <Text style={styles.infoAwayClub}>{awayNameClub}</Text>
           
         </View>
-      </View>
+      </TouchableOpacity>
     )
+  }
+  function _onClick(index : number) {
+    props.onClick(index)
   }
   return (
 
@@ -66,10 +66,10 @@ const ListMatchComponent = (props: ListMatchComponent) => {
       <View style={styles.section}>
       <Text>{props.nameLeague}</Text>
       </View>
-      {props.items.map((item,index) => {
+      {props.items.map((item : ListMatchesItem,index : number) => {
         return (
           <View key={index}>
-          {_buildMatchItem(item.home.name,item.home.id,item.status.started === true ? item.status.scoreStr : item.status.startTimeStr,item.away.name,item.away.id)}
+          {_buildMatchItem(item.home.name,item.home.id,item.status.started === true ? item.status.scoreStr : item.status.startTimeStr,item.away.name,item.away.id,() => _onClick(item.id))}
           </View>
         )
       })}
