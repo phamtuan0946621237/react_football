@@ -24,11 +24,11 @@ const LiveTickerComponent = (props: LiveTickerComponentType) => {
   function _buildCardView(item : LiveTickerItemType) {
     return (
       <View style={style.infoCardContainer}>
-        <Image style={{ width: 36, height: 36 }} source={{ uri: `https://images.fotmob.com/image_resources/playerimages/${item.Players[0].Id}.png` }} />
+        <Image style={{ width: 36, height: 36 }} source={{ uri: `https://images.fotmob.com/image_resources/playerimages/${item && item.Players !== undefined &&item.Players[0].Id}.png` }} />
         <View style={style.infoPlayer}>
             <Text>{item && item.Players !== undefined && item.Players[0].Name}</Text>
           <View style={style.infoClub}>
-            <Image style={{ width: 16, height: 16 ,marginRight : 5}} source={{ uri: `https://www.fotmob.com/images/team/${item.Players[0].TeamId}` }} />
+            <Image style={{ width: 16, height: 16 ,marginRight : 5}} source={{ uri: `https://www.fotmob.com/images/team/${item && item.Players !== undefined &&item.Players[0].TeamId}` }} />
           <Text>{item.HometeamEvent === true ? props.nameHome :  props.nameAway}</Text>
           </View>
         </View>
@@ -45,7 +45,7 @@ const LiveTickerComponent = (props: LiveTickerComponentType) => {
     return (
       <View style={style.SubstitutionContainer}>
         <View style={style.infoPlayerSubstitution}>
-          <Image style={{ width: 36, height: 36 }} source={{ uri: `https://images.fotmob.com/image_resources/playerimages/${item.Players[0].Id}.png` }} />
+          <Image style={{ width: 36, height: 36 }} source={{ uri: `https://images.fotmob.com/image_resources/playerimages/${item && item.Players !== undefined &&item.Players[0].Id}.png` }} />
           <Text style={{ marginVertical: 5 }}>{item && item.Players !== undefined && item.Players[0].Name}</Text>
           <View style={[style.infoClub,]}>
             <Image style={{ width: 16, height: 16 }} source={{ uri: `https://www.fotmob.com/images/team/${item && item.Players !== undefined && item.Players[0].TeamId}` }} />
@@ -53,7 +53,7 @@ const LiveTickerComponent = (props: LiveTickerComponentType) => {
           </View>
         </View>
         <View style={style.infoPlayerSubstitution}>
-          <Image style={{ width: 36, height: 36 }} source={{ uri: `https://images.fotmob.com/image_resources/playerimages/${item.Players[1].Id}.png` }} />
+          <Image style={{ width: 36, height: 36 }} source={{ uri: `https://images.fotmob.com/image_resources/playerimages/${item && item.Players !== undefined &&item.Players[1].Id}.png` }} />
           <Text style={{ marginVertical: 5 }}>{item && item.Players !== undefined && item.Players[1].Name}</Text>
           <View style={[style.infoClub,]}>
             <Image style={{ width: 16, height: 16 }} source={{ uri: `https://www.fotmob.com/images/team/${item && item.Players !== undefined && item.Players[0].TeamId}` }} />
@@ -68,7 +68,7 @@ const LiveTickerComponent = (props: LiveTickerComponentType) => {
     <View >
       {props.livetickerData.map((item: LiveTickerItemType, index: number) => {
         return (
-          <View style={style.item}>
+          <View style={style.item} key = {index}>
             <View style={{ marginRight: 16 }}>
               {item.Elapsed === 0 ? 
               <Image style={{ width: 24, height: 24 }} source={{ uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAMAAADzapwJAAAASFBMVEVHcEwyMjIvLy8yMjIxMTEzMzMyMjIvLy8vLy8vLy8yMjIyMjIzMzMyMjIyMjIxMTEyMjIzMzMyMjIyMjIzMzMwMDAzMzMzMzOJbhwxAAAAF3RSTlMA4DBggPDvQCAQsH9Qv3CQwKBv0F8/r8m6EIEAAACvSURBVBgZhcFZVsMwFETBq/lJ8ZiB3v9OcSyRQ/IBVfxjuhwmPjUdGp9qOVQ+1Os8z1/XypuY1V2CPD92pWhgMUnJGFbdKphBvWlnKHKVkKUcqE5G11SIOkWKGp0cpsFwmZPXxqJhYZPxVLQSNURWFZ68NoKGwCY6ZWrSKVVSotu1MCUd0sSiSGfKHmvONcNnVYZFuXAqWYGXVZrvj8d9liK/TE4nV3jn475Gz9++AUdFDQ8/i/tbAAAAAElFTkSuQmCC" }} />
@@ -80,9 +80,6 @@ const LiveTickerComponent = (props: LiveTickerComponentType) => {
               }
             </View>
             <View style={{ flex: 1 }}>
-              {/* {item.IncidentCode === "YC" || item.IncidentCode === "YR" || item.IncidentCode === "SI" || item.IncidentCode === "AS" || item.IncidentCode === "G" && 
-              <Text style={{ fontWeight: "bold", marginBottom: 8 }}>ege</Text> 
-            } */}
                 {item.IncidentCode === "YC" ? 
                 <Text style={{ fontWeight: "bold", marginBottom: 8 ,color : 'yellow'}}>YELLOW CARD</Text> 
                 :  item.IncidentCode === "YR" ? 

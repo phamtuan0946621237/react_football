@@ -26,7 +26,7 @@ interface InfoTeam {
   name : string,
   score : number
 }
-interface StatusListMatchesItem {
+export interface StatusListMatchesItem {
   cancelled : boolean,
   finished : boolean,
   startDateStr : string,

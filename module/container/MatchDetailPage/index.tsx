@@ -6,6 +6,9 @@ import { matchDetailAction } from '../../../redux/action/match';
 import style from './style';
 import MatchFactsComponent from './component/MatchFactsComponent'
 import LiveTickerComponentType from './component/LiveTickerComponent'
+import StatsComponent from './component/StatsComponent'
+import HeadToHeadComponent from './component/HeadToHeadComponent'
+import LineUpComponent from './component/LineUpComponent'
 interface LiveTickerItemType {
     IncidentCode: string,
     Elapsed: number,
@@ -62,7 +65,7 @@ const MatchDetailPage = (props: any) => {
                     <Text style={style.titleNameClub}>{macthDetailResponse !== undefined && macthDetailResponse?.header?.teams && macthDetailResponse.header.teams[0].name}</Text>
                 </View>
                 <View style={style.result}>
-                    <Text style={style.titleResult}>{macthDetailResponse !== undefined && macthDetailResponse.header.status.scoreStr && macthDetailResponse.header.status.scoreStr}</Text>
+                    <Text style={style.titleResult}>{macthDetailResponse !== undefined && macthDetailResponse.header && macthDetailResponse.header.status.scoreStr && macthDetailResponse.header.status.scoreStr}</Text>
                 </View>
                 <View style={style.infoTeam}>
                     <Image style={{ width: 60, height: 60 }} source={{ uri: `https://www.fotmob.com${macthDetailResponse !== undefined && macthDetailResponse?.header && macthDetailResponse?.header?.teams && macthDetailResponse?.header?.teams[1].imageUrl}` }} />
@@ -97,7 +100,20 @@ const MatchDetailPage = (props: any) => {
                             nameHome = {macthDetailResponse && macthDetailResponse.header && macthDetailResponse.header.teams && macthDetailResponse.header.teams[0].name}
                             nameAway = {macthDetailResponse && macthDetailResponse.header && macthDetailResponse.header.teams && macthDetailResponse.header.teams[1].name}
                         /> 
-                        : null
+                        : macthDetailResponse.nav[selectedIndexType] === "stats" ? 
+                        <StatsComponent 
+                        teamColors={macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.stats && macthDetailResponse.content.stats.teamColors}
+                        statsData={macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.stats && macthDetailResponse.content.stats.stats}/> 
+                        : macthDetailResponse.nav[selectedIndexType] === "head to head" ?
+                        <HeadToHeadComponent h2h = {macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.h2h}/> 
+                        : macthDetailResponse.nav[selectedIndexType] === "lineup" ? 
+                        <LineUpComponent 
+                            benchAway = {macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.lineup && macthDetailResponse.content.lineup.bench && macthDetailResponse.content.lineup.bench[1]}
+                            benchHome = {macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.lineup && macthDetailResponse.content.lineup.bench && macthDetailResponse.content.lineup.bench[0]}
+                            coachesAway = {macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.lineup && macthDetailResponse.content.lineup.coaches && macthDetailResponse.content.lineup.coaches[1]}
+                            coachesHome = {macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.lineup && macthDetailResponse.content.lineup.coaches && macthDetailResponse.content.lineup.coaches[0]}
+                        /> : null
+
                     }
                 </View>
             }
