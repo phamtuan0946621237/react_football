@@ -9,11 +9,16 @@ import LiveTickerComponentType from './component/LiveTickerComponent'
 import StatsComponent from './component/StatsComponent'
 import HeadToHeadComponent from './component/HeadToHeadComponent'
 import LineUpComponent from './component/LineUpComponent'
+import { Navigator } from '../../../navigation'
 interface LiveTickerItemType {
     IncidentCode: string,
     Elapsed: number,
     ElapsedPlus: number,
     Description: string
+}
+export interface RouteClubType {
+    idTeam : string,
+    nameClub : string
 }
 const MatchDetailPage = (props: any) => {
     //variable
@@ -21,8 +26,7 @@ const MatchDetailPage = (props: any) => {
     const dispatch = useDispatch()
     const navigation = useNavigation();
     const [selectedIndexType, setSelectedIndexType] = useState(0)
-    const routeParams = useRoute().params as any;
-    console.log("routeParams", routeParams.matchId)
+    const routeParams = useRoute().params as any
     const [liveTickerData, setLiveTickerData] = useState<Array<any>>()
     // life cycle
     useEffect(() => {
@@ -36,7 +40,7 @@ const MatchDetailPage = (props: any) => {
 
     useEffect(() => {
         console.log("macthDetailResponse", macthDetailResponse)
-        if (macthDetailResponse === undefined) return 
+        if (macthDetailResponse === undefined) return
         fetch(`http://${macthDetailResponse.content.liveticker.url}`, {
             "method": "GET",
         })
@@ -53,24 +57,41 @@ const MatchDetailPage = (props: any) => {
     // action 
     function _selectedType(index: number) {
         setSelectedIndexType(index)
-        
+
     }
-    console.log("liveTickerData",liveTickerData)
+    function _onClickClub(pageUrl?: string) {
+        if (pageUrl !== undefined) {
+            var first = pageUrl.slice(7)
+            var index = first.indexOf("/")
+            var id = first.slice(0, index)
+            var second = first.slice(index, first.length)
+            var name = second.slice(10, first.length)
+            navigation.navigate(Navigator.clubRoute, { idTeam: id, nameClub: name } as RouteClubType)
+        }
+
+    }
+    var team = macthDetailResponse && macthDetailResponse.header && macthDetailResponse.header.teams
     //layout
     return (
         <ScrollView style={{ backgroundColor: 'white' }}>
             <View style={style.infoMatch}>
-                <View style={style.infoTeam}>
+                <TouchableOpacity style={style.infoTeam} onPress={() => _onClickClub(team[0].pageUrl)}>
                     <Image style={{ width: 60, height: 60 }} source={{ uri: `https://www.fotmob.com${macthDetailResponse !== undefined && macthDetailResponse?.header?.teams && macthDetailResponse?.header?.teams[0].imageUrl}` }} />
-                    <Text style={style.titleNameClub}>{macthDetailResponse !== undefined && macthDetailResponse?.header?.teams && macthDetailResponse.header.teams[0].name}</Text>
-                </View>
+                    <Text style={style.titleNameClub}>{macthDetailResponse  && macthDetailResponse?.header && macthDetailResponse?.header?.teams && macthDetailResponse.header.teams[0] && macthDetailResponse.header.teams[0].name}</Text>
+                </TouchableOpacity>
                 <View style={style.result}>
-                    <Text style={style.titleResult}>{macthDetailResponse !== undefined && macthDetailResponse.header && macthDetailResponse.header.status.scoreStr && macthDetailResponse.header.status.scoreStr}</Text>
+                    {macthDetailResponse && macthDetailResponse.header && macthDetailResponse.header.status &&
+                    <Text style={style.titleResult}>{macthDetailResponse.header.status.started === true ? macthDetailResponse.header.status.scoreStr : macthDetailResponse.header.status.startTimeStr}</Text>
+                    }
+                    {macthDetailResponse !== undefined && macthDetailResponse.header && macthDetailResponse.header.status.scoreStr && macthDetailResponse.header.status.started === false ?
+                        <Text style={{ fontSize: 12, marginTop: 5 }}>{macthDetailResponse.header.status.startDateStr}</Text> : null
+                    }
+
                 </View>
-                <View style={style.infoTeam}>
+                <TouchableOpacity style={style.infoTeam} onPress={() => _onClickClub(team[1].pageUrl)}>
                     <Image style={{ width: 60, height: 60 }} source={{ uri: `https://www.fotmob.com${macthDetailResponse !== undefined && macthDetailResponse?.header && macthDetailResponse?.header?.teams && macthDetailResponse?.header?.teams[1].imageUrl}` }} />
                     <Text style={style.titleNameClub}>{macthDetailResponse !== undefined && macthDetailResponse?.header?.teams && macthDetailResponse.header.teams[1].name}</Text>
-                </View>
+                </TouchableOpacity>
             </View>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{ backgroundColor: 'white', minHeight: 50 }}>
                 {macthDetailResponse !== undefined && macthDetailResponse.nav.map((item: string, index: number) => {
@@ -94,25 +115,25 @@ const MatchDetailPage = (props: any) => {
                             Tournament={macthDetailResponse !== undefined && macthDetailResponse.content.matchFacts.infoBox.Tournament && macthDetailResponse.content.matchFacts.infoBox.Tournament.text}
                             events={macthDetailResponse !== undefined && macthDetailResponse.content.matchFacts.events ? macthDetailResponse.content.matchFacts.events.events : []}
                         />
-                        : macthDetailResponse.nav[selectedIndexType] === "live ticker" ? 
-                        <LiveTickerComponentType 
-                            livetickerData={liveTickerData !== undefined && liveTickerData} 
-                            nameHome = {macthDetailResponse && macthDetailResponse.header && macthDetailResponse.header.teams && macthDetailResponse.header.teams[0].name}
-                            nameAway = {macthDetailResponse && macthDetailResponse.header && macthDetailResponse.header.teams && macthDetailResponse.header.teams[1].name}
-                        /> 
-                        : macthDetailResponse.nav[selectedIndexType] === "stats" ? 
-                        <StatsComponent 
-                        teamColors={macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.stats && macthDetailResponse.content.stats.teamColors}
-                        statsData={macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.stats && macthDetailResponse.content.stats.stats}/> 
-                        : macthDetailResponse.nav[selectedIndexType] === "head to head" ?
-                        <HeadToHeadComponent h2h = {macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.h2h}/> 
-                        : macthDetailResponse.nav[selectedIndexType] === "lineup" ? 
-                        <LineUpComponent 
-                            benchAway = {macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.lineup && macthDetailResponse.content.lineup.bench && macthDetailResponse.content.lineup.bench[1]}
-                            benchHome = {macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.lineup && macthDetailResponse.content.lineup.bench && macthDetailResponse.content.lineup.bench[0]}
-                            coachesAway = {macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.lineup && macthDetailResponse.content.lineup.coaches && macthDetailResponse.content.lineup.coaches[1]}
-                            coachesHome = {macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.lineup && macthDetailResponse.content.lineup.coaches && macthDetailResponse.content.lineup.coaches[0]}
-                        /> : null
+                        : macthDetailResponse.nav[selectedIndexType] === "live ticker" ?
+                            <LiveTickerComponentType
+                                livetickerData={liveTickerData !== undefined && liveTickerData}
+                                nameHome={macthDetailResponse && macthDetailResponse.header && macthDetailResponse.header.teams && macthDetailResponse.header.teams[0].name}
+                                nameAway={macthDetailResponse && macthDetailResponse.header && macthDetailResponse.header.teams && macthDetailResponse.header.teams[1].name}
+                            />
+                            : macthDetailResponse.nav[selectedIndexType] === "stats" ?
+                                <StatsComponent
+                                    teamColors={macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.stats && macthDetailResponse.content.stats.teamColors}
+                                    statsData={macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.stats && macthDetailResponse.content.stats.stats} />
+                                : macthDetailResponse.nav[selectedIndexType] === "head to head" ?
+                                    <HeadToHeadComponent h2h={macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.h2h} />
+                                    : macthDetailResponse.nav[selectedIndexType] === "lineup" ?
+                                        <LineUpComponent
+                                            benchAway={macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.lineup && macthDetailResponse.content.lineup.bench && macthDetailResponse.content.lineup.bench[1]}
+                                            benchHome={macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.lineup && macthDetailResponse.content.lineup.bench && macthDetailResponse.content.lineup.bench[0]}
+                                            coachesAway={macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.lineup && macthDetailResponse.content.lineup.coaches && macthDetailResponse.content.lineup.coaches[1]}
+                                            coachesHome={macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.lineup && macthDetailResponse.content.lineup.coaches && macthDetailResponse.content.lineup.coaches[0]}
+                                        /> : null
 
                     }
                 </View>
@@ -127,3 +148,4 @@ const mapStateToProps = (state: any) => {
 };
 
 export default connect(mapStateToProps)(memo(MatchDetailPage));
+

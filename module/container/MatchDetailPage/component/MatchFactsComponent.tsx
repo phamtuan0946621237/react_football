@@ -83,7 +83,7 @@ const MatchFactsComponent = (props: MatchFactsComponentType) => {
               </View>
             </View>
             <View style={{ paddingVertical: 4, paddingHorizontal: 10, backgroundColor: 'blue', borderRadius: 5, alignSelf: 'center' }}>
-              <Text style={{ color: 'white' }}>{props.playerOfTheMatch && props.playerOfTheMatch.rating.num}</Text>
+              <Text style={{ color: 'white' }}>{props.playerOfTheMatch &&props.playerOfTheMatch.rating && props.playerOfTheMatch.rating.num}</Text>
             </View>
           </View>
         </View>

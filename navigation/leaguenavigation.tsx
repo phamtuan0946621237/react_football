@@ -1,33 +1,32 @@
 import { createStackNavigator,StackNavigationOptions } from '@react-navigation/stack';
 import React from 'react'
 import MatchPage from '../module/container/MatchPage'
-import LeaguePage from '../module/container/LeaguePage'
+// import LeaguePage from '../module/container/LeaguePage'
 import MatchDetailPage from '../module/container/MatchDetailPage'
 import ClubPage from '../module/container/ClubPage'
 import {Platform} from 'react-native'
+import LeaguePage from '../module/container/League'
+import LeagueDetailPage from '../module/container/LeagueDetail'
+
 const Stack = createStackNavigator();
 
-
-export const matchRoute = 'MatchRoute';
-export const matchDetailRoute = 'MatchDetailRoute';
 export const leagueRoute = 'LeagueRoute';
-export const clubRoute = 'ClubRoute';
+export const leagueDetailRoute = 'LeagueDetailRoute';
 
-function MacthStack() {
+function LeagueStack() {
   return (
     <Stack.Navigator 
     screenOptions={ScreenOptions}
-    initialRouteName={matchRoute}
+    initialRouteName={leagueRoute}
     >
-      <Stack.Screen  key={matchRoute} name={matchRoute} component={MatchPage} options={{title : "Match"}}/>
-      <Stack.Screen key={leagueRoute} name={leagueRoute} component={LeaguePage} options={{title : "League"}}/>
-      <Stack.Screen key={matchDetailRoute} name={matchDetailRoute} component={MatchDetailPage} options={{title : "Match Detail"}}/>
-      <Stack.Screen key={clubRoute} name={clubRoute} component={ClubPage} options={{title : "Club"}}/>
+      <Stack.Screen  key={leagueRoute} name={leagueRoute} component={LeaguePage} options={{title : "League"}}/>
+      <Stack.Screen  key={leagueDetailRoute} name={leagueDetailRoute} component={LeagueDetailPage} options={{title : "League Detail"}}/>
+      
     </Stack.Navigator>
   );
 }
 
-export default MacthStack
+export default LeagueStack
 
 export const ScreenOptions: StackNavigationOptions = {
     // headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,

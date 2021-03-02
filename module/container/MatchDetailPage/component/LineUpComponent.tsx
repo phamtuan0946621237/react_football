@@ -23,7 +23,7 @@ const LineUpComponent = (props: LineUpComponentType) => {
           <View style={style.playerClub}>
             {home.map((item: LineUpType, index: number) => {
               return (
-                <View style={style.playerItemContainer}>
+                <View key={index} style={style.playerItemContainer}>
                   <Image style={{ width: 40, height: 40, marginBottom: 10 }} source={{ uri: item.imageUrl }} />
                     <Text>{item.name.firstName} {item.name.lastName}</Text>
                 </View>
@@ -34,7 +34,7 @@ const LineUpComponent = (props: LineUpComponentType) => {
           <View style={style.playerClub}>
             {away.map((item: LineUpType, index: number) => {
               return (
-                <View style={style.playerItemContainer}>
+                <View key={index} style={style.playerItemContainer}>
                   <Image style={{ width: 40, height: 40, marginBottom: 10 }} source={{ uri: item.imageUrl }} />
                   <Text>{item.name.firstName} {item.name.lastName}</Text>
                 </View>

@@ -22,3 +22,11 @@ export const fetchGet = (url : String, params : any) => {
           })
     })      
 }
+
+export async function POST(url : string,parram : any) {
+  let result = await fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(parram)
+  })
+  return result.json()
+}

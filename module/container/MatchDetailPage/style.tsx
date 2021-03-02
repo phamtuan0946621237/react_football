@@ -16,7 +16,7 @@ export default StyleSheet.create({
     },
     result : {
         flex : 1,
-        flexDirection : 'row',
+        flexDirection : 'column',
         justifyContent : 'center',
         alignItems : 'center'
     },
