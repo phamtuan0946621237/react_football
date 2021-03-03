@@ -7,37 +7,22 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { ListTableItem } from '../../../component'
-import { ListTableItemType } from '../../../component/ListTableItem'
+// import { ListTableItemType } from '../../../component/ListTableItem'
 import { StatusListMatchesItem } from '../../MatchPage/component/ListMatchComponent';
 import ListTransfersItem from '../../../component/ListTransfersItem';
+import {TransferType,ListTableItemType} from '../../../type'
 
 interface TransfersClubComponentType {
   transferData: [TransferType][]
-  idclub : any
+  idclub : any,
+  onClickTransfer ?: (id : number) => void
 }
-
-interface TransferType {
-  contractExtension: boolean,
-  fee?: { feeText: string, value: string } | any ,
-  fromClub: string,
-  fromClubId: number,
-  fromDate: string,
-  marketValue: string,
-  name: string,
-  onLoan: string,
-  playerId: number,
-  position: string,
-  toClub: string,
-  toClubId: number,
-  toDate: string,
-  transferDate: string,
-  transferText: Array<any>,
-  transferType: string
-}
-
 
 const TransfersClubComponent = (props: TransfersClubComponentType) => {
-  console.log("transferData", props.transferData)
+
+  function onClickTransfer(id : number) {
+    if (props.onClickTransfer) props.onClickTransfer(id)
+  }
   return (
     <View style={style.container}>
       {props.transferData.map((items: [TransferType], i: number) => {
@@ -51,7 +36,7 @@ const TransfersClubComponent = (props: TransfersClubComponentType) => {
                   marketValue={item.marketValue}
                   contract= {i !== 0 && i !== 1 ? item.toDate: `${item.fromDate} - ${item.toDate}`}
                   titleContract={item.transferType}
-                  fee={ item.fee.value ? item.fee.value : item.fee}
+                  fee={ item.fee && item.fee.value ? item.fee.value : item.fee}
                   club={ i === 0 ? item.fromClub : i === 1 ? item.toClub : item.fromClub}
                   idClub={i === 0 ? item.fromClubId : i === 1 ? item.toClubId : item.fromClubId}
                   fromTO={i === 0 ? "From" : i === 1 ? "To" : ""}
@@ -60,6 +45,7 @@ const TransfersClubComponent = (props: TransfersClubComponentType) => {
                   idPlayer={item.playerId}
                   time={item.transferDate}
                   title = {i !== 0 && i !== 1 ? "contract" : ""}
+                  onClick={() => onClickTransfer(item.playerId)}
                 />
               )
             })}

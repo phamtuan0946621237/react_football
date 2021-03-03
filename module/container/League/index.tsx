@@ -1,16 +1,16 @@
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from '@react-navigation/native';
-import dayjs from 'dayjs';
 import React, { memo, useEffect, useState } from 'react';
-import { FlatList, Text, TouchableOpacity, View, Image } from 'react-native';
-import Modal from 'react-native-modal';
-import { connect, useDispatch } from 'react-redux';
-import { leagueAction } from '../../../redux/action/league'
-import { matchAction } from '../../../redux/action/match';
-import ListMatchComponent from './component/ListMatchComponent';
-import { Navigator, LeagueNavigator } from '../../../navigation'
-import style from './style';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { connect, useDispatch } from 'react-redux';
+import { LeagueNavigator } from '../../../navigation';
+import { leagueAction } from '../../../redux/action/league';
+import style from './style';
+
+export interface RouteLeague {
+    id : string,
+    name  : string
+}
 const LeaguePage = (props: any) => {
     //variable
     const { leagueResponse } = props
@@ -19,66 +19,58 @@ const LeaguePage = (props: any) => {
     let arrUp = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0IQCBODtt-FkmBbpDm0zUTmPzzVh91jdCYA&usqp=CAU"
     let arrDown = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3-ywUVHBNam3DS8gXfLDGYf7lpS98npeAhw&usqp=CAU"
     const [isShow,setIsShow] = useState<boolean>(false)
-    // const [data, setData] = useState()
+    const [selectedIndex,setSelectedIndex] = useState<number>()
+
+    // life cycle
     useEffect(() => {
         dispatch(leagueAction({}))
     }, [])
 
-    useEffect(() => {
-        console.log('leagueResponse', leagueResponse)
-    }, [leagueResponse])
-    // call API
-    const fetchApiCall = () => {
-        fetch("https://www.fotmob.com/allLeagues", {
-            "method": "POST",
-        })
-            .then(response => response.json())
-            .then(response => {
-                console.log("response", response)
-                // setData(response)
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }
-
-    function _onClickArr() {
+    // action
+    function _onClickArr(index : number) {
+        setSelectedIndex(index)
         setIsShow(!isShow)
     }
-    //layout
-    console.log("Object : ", Object.values(leagueResponse))
-    function onClick() {
-        navigation.navigate(LeagueNavigator.leagueDetailRoute)
+    function onClick(url : string) {
+        var first = url.slice(9)
+      var index = first.indexOf("/")
+      var id = first.slice(0, index)
+      var second = first.slice(index, first.length)
+      var name = second.slice(10, first.length)
+        navigation.navigate(LeagueNavigator.leagueDetailRoute,{id : id,name : name} as RouteLeague)
     }
+
+    //layout
     return (
         <ScrollView style={style.container}>
-            {Object.values(leagueResponse).map((items: any, i: number) => {
+            {leagueResponse && Object.values(leagueResponse).map((items: any, i: number) => {
                 if (items !== null) {
                     return (
                         <View key={i}>
-                            <Text style={style.title} onPress={onClick}>LeaguePage</Text>
+                            <Text style={style.title} >{i === 1 ? "POPULAR" : i === 2 ? "WORLD" : "COUNTRIES"}</Text>
                             {items.map((item: any, index: number) => {
                                     return (
-                                        <View>
-                                            <TouchableOpacity style={style.item}>
+                                        <View key = {index}>
+                                            <TouchableOpacity style={style.item} onPress={item.leagues ? () => {} : () => onClick(item.pageUrl)} activeOpacity = {item.leagues ? 1:  0.5}>
                                                 <Image style={{ width: 24, height: 24, marginRight: 16 }} source={{ uri: item.leagues ? `https://images.fotmob.com/image_resources/logo/teamlogo/${item.ccode.toLowerCase()}.png` :`https://www.fotmob.com/images/league/${item.id}` }} />
                                                 <Text style={{ flex: 1 }}>{item.name}</Text>
                                                 {item.leagues &&
-                                                    <TouchableOpacity style={style.iconArrContainer} onPress = {_onClickArr}>
-                                                        <Image style={{ width: 16, height: 16 }} source={{ uri: isShow === false ? arrDown : arrUp }} />
+                                                    <TouchableOpacity style={style.iconArrContainer} onPress = {() => _onClickArr(index)}>
+                                                        <Image style={{ width: 16, height: 16 }} source={{ uri: isShow === true && selectedIndex === index ? arrUp : arrDown }} />
                                                     </TouchableOpacity>
                                                 }
                                             </TouchableOpacity>
-                                            {isShow === true && item.leagues && item.leagues.map((itemLeague: any, indexLeague: number) => {
+                                            {
+                                            selectedIndex === index && isShow === true && 
+                                            item.leagues && item.leagues.map((itemLeague: any, indexLeague: number) => {
                                                 return (
-                                                    <Text style={{ paddingVertical: 8 }}>{itemLeague.name}</Text>
+                                                    <Text onPress = {() => onClick(itemLeague.pageUrl)} key={indexLeague} style={{ paddingVertical: 8 }}>{itemLeague.name}</Text>
                                                 )
                                             })}
 
                                         </View>
                                     )
                                 })}
-
                         </View>
                     )
                 }

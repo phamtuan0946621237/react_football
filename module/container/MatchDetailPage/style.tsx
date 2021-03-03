@@ -27,7 +27,8 @@ export default StyleSheet.create({
     titleNameClub : {
         marginTop : 8,
         fontWeight : "500",
-        fontSize : 16
+        fontSize : 16,
+        textAlign : 'center'
     }
   
 });

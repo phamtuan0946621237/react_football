@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import MatchPage from '../module/container/matchPage'
 import MacthStack from './navigation'
 import LeagueStack from './leaguenavigation'
+import SearchStack from './searchNavigation'
 const TabbarNavigation = () => {
 
     function SettingsScreen() {
@@ -21,6 +22,7 @@ const TabbarNavigation = () => {
             <BottomTab.Navigator>
                 <BottomTab.Screen name="MacthStack" component={MacthStack} options={{title : "Match"}}/>
                 <BottomTab.Screen name="LeagueStack" component={LeagueStack} options={{title : "League"}}/>
+                <BottomTab.Screen name="SearchStack" component={SearchStack} options={{title : "Search"}}/>
             </BottomTab.Navigator>
         </NavigationContainer>
     )

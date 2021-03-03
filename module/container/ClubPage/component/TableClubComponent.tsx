@@ -7,29 +7,14 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { ListTableItem } from '../../../component'
-import { ListTableItemType } from '../../../component/ListTableItem'
+import {TableClubComponentType,OtherLeagueType,ListTableItemType} from '../../../type'
 
-interface TableClubComponentType {
-  tableHeader: Array<string>,
-  tableData: Array<ListTableItemType>,
-  otherLeague: Array<OtherLeagueType>,
-  mainLeagueName: string,
-  otherLeagueName?: string,
-  onClickClub : (id : string,name : string) => void
-}
-interface OtherLeagueType {
-  leagueId: number,
-  leagueName: string,
-  table: Array<ListTableItemType>
-}
 
 
 
 const TableClubComponent = (props: TableClubComponentType) => {
-  console.log("otherLeague", props.otherLeague)
 
   function _onClickClub(pageUrl ?: string) {
-    console.log("pageUrl",pageUrl)
     if (pageUrl !== undefined) {
       var first = pageUrl.slice(7)
       var index = first.indexOf("/")
@@ -52,7 +37,7 @@ const TableClubComponent = (props: TableClubComponentType) => {
       {props.otherLeagueName &&
         <Text style={style.titleLeague}>{props.otherLeagueName}</Text>
       }
-      {props.otherLeague.map((item: OtherLeagueType, index: number) => {
+      {props.otherLeague && props.otherLeague.map((item: OtherLeagueType, index: number) => {
         return (
           <View key={index}>
             <Text style={{ margin: 16 }}>{item.leagueName}</Text>

@@ -1,21 +1,16 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { memo, useEffect, useState } from 'react';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View,Linking } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import { matchDetailAction } from '../../../redux/action/match';
 import style from './style';
 import MatchFactsComponent from './component/MatchFactsComponent'
-import LiveTickerComponentType from './component/LiveTickerComponent'
+import LiveTickerComponent,{LiveTickerItemType} from './component/LiveTickerComponent'
 import StatsComponent from './component/StatsComponent'
 import HeadToHeadComponent from './component/HeadToHeadComponent'
 import LineUpComponent from './component/LineUpComponent'
 import { Navigator } from '../../../navigation'
-interface LiveTickerItemType {
-    IncidentCode: string,
-    Elapsed: number,
-    ElapsedPlus: number,
-    Description: string
-}
+
 export interface RouteClubType {
     idTeam : string,
     nameClub : string
@@ -27,7 +22,8 @@ const MatchDetailPage = (props: any) => {
     const navigation = useNavigation();
     const [selectedIndexType, setSelectedIndexType] = useState(0)
     const routeParams = useRoute().params as any
-    const [liveTickerData, setLiveTickerData] = useState<Array<any>>()
+    const [liveTickerData, setLiveTickerData] = useState<Array<LiveTickerItemType>>()
+    const [type,setType] = useState<Array<string>>([])
     // life cycle
     useEffect(() => {
         dispatch(matchDetailAction({
@@ -36,10 +32,9 @@ const MatchDetailPage = (props: any) => {
         }))
 
         return () => { };
-    }, [])
+    }, [routeParams.matchId])
 
     useEffect(() => {
-        console.log("macthDetailResponse", macthDetailResponse)
         if (macthDetailResponse === undefined) return
         fetch(`http://${macthDetailResponse.content.liveticker.url}`, {
             "method": "GET",
@@ -69,6 +64,15 @@ const MatchDetailPage = (props: any) => {
             navigation.navigate(Navigator.clubRoute, { idTeam: id, nameClub: name } as RouteClubType)
         }
 
+    }
+    function _onClickPlayer(id : number) {
+        navigation.navigate(Navigator.playerRoute,{idPlayer : id} )
+    }
+    function _onClickOpenBrower(url : string) {
+        Linking.openURL(url);
+    }
+    function _onClickClubForm(id : string,name : string) {
+        navigation.navigate(Navigator.clubRoute, { idTeam: id, nameClub: name } as RouteClubType)
     }
     var team = macthDetailResponse && macthDetailResponse.header && macthDetailResponse.header.teams
     //layout
@@ -106,6 +110,10 @@ const MatchDetailPage = (props: any) => {
                 <View >
                     {macthDetailResponse.nav[selectedIndexType] === "match facts" ?
                         <MatchFactsComponent
+                        onClickClub={_onClickClubForm}
+                            onClickOpenBrower={_onClickOpenBrower}
+                            highlights = {macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.matchFacts && macthDetailResponse.content.matchFacts.highlights}
+                            onClick={_onClickPlayer}
                             playerOfTheMatch={macthDetailResponse !== undefined && macthDetailResponse.content.matchFacts.playerOfTheMatch}
                             teamFormHome={macthDetailResponse !== undefined ? macthDetailResponse.content.matchFacts.teamForm[0] : []}
                             teamFormAway={macthDetailResponse !== undefined ? macthDetailResponse.content.matchFacts.teamForm[1] : []}
@@ -116,8 +124,9 @@ const MatchDetailPage = (props: any) => {
                             events={macthDetailResponse !== undefined && macthDetailResponse.content.matchFacts.events ? macthDetailResponse.content.matchFacts.events.events : []}
                         />
                         : macthDetailResponse.nav[selectedIndexType] === "live ticker" ?
-                            <LiveTickerComponentType
-                                livetickerData={liveTickerData !== undefined && liveTickerData}
+                            <LiveTickerComponent
+                                onClickPlayer={_onClickPlayer}
+                                livetickerData={liveTickerData}
                                 nameHome={macthDetailResponse && macthDetailResponse.header && macthDetailResponse.header.teams && macthDetailResponse.header.teams[0].name}
                                 nameAway={macthDetailResponse && macthDetailResponse.header && macthDetailResponse.header.teams && macthDetailResponse.header.teams[1].name}
                             />
@@ -133,6 +142,7 @@ const MatchDetailPage = (props: any) => {
                                             benchHome={macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.lineup && macthDetailResponse.content.lineup.bench && macthDetailResponse.content.lineup.bench[0]}
                                             coachesAway={macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.lineup && macthDetailResponse.content.lineup.coaches && macthDetailResponse.content.lineup.coaches[1]}
                                             coachesHome={macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.lineup && macthDetailResponse.content.lineup.coaches && macthDetailResponse.content.lineup.coaches[0]}
+                                            onClickPlayer={_onClickPlayer}
                                         /> : null
 
                     }

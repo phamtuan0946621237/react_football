@@ -15,7 +15,7 @@ import store from './redux/configStore';
 
 
 import TabbarNavigation from './navigation/tabbarNavigation'
-const App: () => React$Node = () => {
+const App = () => {
 
   return (
     <Provider store={store}>

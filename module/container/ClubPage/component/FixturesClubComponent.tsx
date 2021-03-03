@@ -1,17 +1,17 @@
 import React, { memo } from 'react';
 import {
-  Text,
   Image,
-  View,
-  StyleSheet,
-  TouchableOpacity
+
+  StyleSheet, Text,
+
+  View
 } from 'react-native';
-import { ListTableItem } from '../../../component'
-import { ListTableItemType } from '../../../component/ListTableItem'
 import { StatusListMatchesItem } from '../../MatchPage/component/ListMatchComponent';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface FixturesClubComponentType {
   fixturesData: [FixturesDataType][]
+  onClickMatches ?: (id : number) => void
 }
 interface FixturesDataType {
   id: number,
@@ -26,15 +26,19 @@ interface FixturesDataType {
 
 
 const FixturesClubComponent = (props: FixturesClubComponentType) => {
+
+  function _onClickMatches(id : number) {
+    if (props.onClickMatches) props.onClickMatches(id)
+  }
   return (
     <View style={{ backgroundColor: 'white' }}>
       {props.fixturesData.map((itemmm: [FixturesDataType], index: number) => {
         return (
-          <View style={{ padding: 16 }}>
+          <View key={index} style={{ padding: 16 }}>
             <Text style={style.title}>{itemmm[0].monthYearKey}</Text>
             {itemmm.map((item: FixturesDataType, i: number) => {
               return (
-                <View style={style.infoContainer}>
+                <TouchableOpacity style={style.infoContainer} onPress={() => _onClickMatches(item.id)}>
                   <Image style={{ width: 40, height: 40 }} source={{ uri: `https://www.fotmob.com/images/team/${item.opponent.id}` }} />
                   <View style={style.right}>
                     <View style={style.info}>
@@ -46,7 +50,7 @@ const FixturesClubComponent = (props: FixturesClubComponentType) => {
                       <Text >{item.status.started === true ? item.status.scoreStr : item.status.startTimeStr}</Text>
                     </View>
                   </View>
-                </View>
+                </TouchableOpacity>
               )
             })}
           </View>

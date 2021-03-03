@@ -27,11 +27,6 @@ const MatchPage = (props: any) => {
         return () => { };
     }, [])
 
-    useEffect(() => {
-        console.log("macthResponse", macthResponse)
-
-    }, [macthResponse])
-
     // action 
     function showDatepicker() {
         setShow(true)

@@ -3,15 +3,17 @@ import {
   Text,
   Image,
   View,
-  StyleSheet
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native';
 
 interface LiveTickerComponentType {
-  livetickerData: Array<LiveTickerItemType>
+  livetickerData ?: Array<LiveTickerItemType>
   nameHome : string,
   nameAway : string
+  onClickPlayer ?: (id : number) => void
 }
-interface LiveTickerItemType {
+export interface LiveTickerItemType {
   IncidentCode: string,
   Elapsed: number,
   ElapsedPlus: number,
@@ -21,9 +23,13 @@ interface LiveTickerItemType {
 }
 
 const LiveTickerComponent = (props: LiveTickerComponentType) => {
+
+  function onClickPlayer(id ?: number) {
+    if (props.onClickPlayer && id !== undefined) props.onClickPlayer(id)
+  }
   function _buildCardView(item : LiveTickerItemType) {
     return (
-      <View style={style.infoCardContainer}>
+      <TouchableOpacity style={style.infoCardContainer} onPress={() => onClickPlayer(item.Players && item.Players[0].Id)}>
         <Image style={{ width: 36, height: 36 }} source={{ uri: `https://images.fotmob.com/image_resources/playerimages/${item && item.Players !== undefined &&item.Players[0].Id}.png` }} />
         <View style={style.infoPlayer}>
             <Text>{item && item.Players !== undefined && item.Players[0].Name}</Text>
@@ -37,36 +43,36 @@ const LiveTickerComponent = (props: LiveTickerComponentType) => {
         : item.IncidentCode === "G" ? <Image style={{ width: 20, height: 20, }} source={{ uri: "https://d1nhio0ox7pgb.cloudfront.net/_img/i_collection_png/512x512/plain/soccer_ball.png" }} />
         : <Text>AS</Text>
     }
-      </View>
+      </TouchableOpacity>
     )
   }
 
   function _buildSubstitution(item : LiveTickerItemType) {
     return (
       <View style={style.SubstitutionContainer}>
-        <View style={style.infoPlayerSubstitution}>
+        <TouchableOpacity style={style.infoPlayerSubstitution} onPress={() => onClickPlayer(item.Players && item.Players[0].Id)}>
           <Image style={{ width: 36, height: 36 }} source={{ uri: `https://images.fotmob.com/image_resources/playerimages/${item && item.Players !== undefined &&item.Players[0].Id}.png` }} />
           <Text style={{ marginVertical: 5 }}>{item && item.Players !== undefined && item.Players[0].Name}</Text>
           <View style={[style.infoClub,]}>
             <Image style={{ width: 16, height: 16 }} source={{ uri: `https://www.fotmob.com/images/team/${item && item.Players !== undefined && item.Players[0].TeamId}` }} />
             <Text> {item.HometeamEvent === true ? props.nameHome :  props.nameAway}</Text>
           </View>
-        </View>
-        <View style={style.infoPlayerSubstitution}>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.infoPlayerSubstitution} onPress={() => onClickPlayer(item.Players && item.Players[1].Id)}>
           <Image style={{ width: 36, height: 36 }} source={{ uri: `https://images.fotmob.com/image_resources/playerimages/${item && item.Players !== undefined &&item.Players[1].Id}.png` }} />
           <Text style={{ marginVertical: 5 }}>{item && item.Players !== undefined && item.Players[1].Name}</Text>
           <View style={[style.infoClub,]}>
             <Image style={{ width: 16, height: 16 }} source={{ uri: `https://www.fotmob.com/images/team/${item && item.Players !== undefined && item.Players[0].TeamId}` }} />
             <Text>{item.HometeamEvent === true ? props.nameHome :  props.nameAway}</Text>
           </View>
-        </View>
+        </TouchableOpacity>
         <Image style={style.iconSubtitution} source={{ uri: "https://p.kindpng.com/picc/s/377-3772518_transfer-transparent-images-png-green-and-red-arrows.png" }} />
       </View>
     )
   }
   return (
     <View >
-      {props.livetickerData.map((item: LiveTickerItemType, index: number) => {
+      {props.livetickerData && props.livetickerData.map((item: LiveTickerItemType, index: number) => {
         return (
           <View style={style.item} key = {index}>
             <View style={{ marginRight: 16 }}>
@@ -120,7 +126,7 @@ const style = StyleSheet.create({
   },
   infoClub: {
     flexDirection: 'row',
-    marginTop: 5
+    marginTop: 5,
   },
   infoCardContainer: {
     flexDirection: 'row',
@@ -141,7 +147,8 @@ const style = StyleSheet.create({
   },
   SubstitutionContainer: {
     flexDirection: 'row',
-    marginTop: 16
+    marginTop: 16,
+    flex: 1,
   },
   infoPlayerSubstitution: {
     flexDirection: 'column',
@@ -152,7 +159,9 @@ const style = StyleSheet.create({
     borderColor: '#E5E5E5',
     borderRadius: 10,
     marginHorizontal: 5,
-    paddingVertical : 8
+    paddingVertical : 8,
+    // width: 50
+    // backgroundColor : 'green'
   },
   iconSubtitution: {
     width: 30,

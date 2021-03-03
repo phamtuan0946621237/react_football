@@ -1,16 +1,16 @@
 import React, { memo } from 'react';
 import {
-  Text,
   Image,
-  View,
-  StyleSheet,
-  TouchableOpacity
+
+  StyleSheet, Text,
+
+  View
 } from 'react-native';
-import { ListTableItem } from '../../../component'
-import { ListTableItemType } from '../../../component/ListTableItem'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface SquadClubComponentType {
   data: [string, Array<SquadType>]
+  onClickPlayer ?: (id : number) => void
 }
 
 interface SquadType {
@@ -23,22 +23,25 @@ interface SquadType {
 
 const SquadClubComponent = (props: SquadClubComponentType) => {
 
+  function _onClickPlayer(id : number) {
+    if (props.onClickPlayer) props.onClickPlayer(id)
+  }
   return (
     <View style={{ backgroundColor: 'white', borderTopWidth: 1, borderColor: '#E5E5E5' }}>
 
       {props.data.map((item: any, index: number) => {
         return (
-          <View style={style.item}>
+          <View key={index} style={style.item}>
             <Text style={style.title}>{item[0].toUpperCase()}</Text>
             {item[1] && item[1].map((items: SquadType, i: number) => {
               return (
-                <View style={style.infoItem}>
+                <TouchableOpacity key={i} style={style.infoItem} onPress={() => _onClickPlayer(items.id)}>
                   <Image source={{ uri: `https://images.fotmob.com/image_resources/playerimages/${items.id}.png` }} style={style.icon} />
                   <View style={style.info}>
                     <Text style={{fontWeight : '600'}}>{items.name}</Text>
                     <Text>{items.cname}</Text>
                   </View>
-                </View>
+                </TouchableOpacity>
               )
             })}
 

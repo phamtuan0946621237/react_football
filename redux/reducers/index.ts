@@ -5,6 +5,8 @@ import { combineReducers } from 'redux'
 import macth from './match'
 import club from './club'
 import league from './league'
+import search from './search'
+import player from './player'
 // const keyConfig = {
 //     key: 'rootStorage',
 //     storage: AsyncStorage,
@@ -12,5 +14,7 @@ import league from './league'
 export default combineReducers({
     macth,
     club,
-    league
+    league,
+    search,
+    player
 })

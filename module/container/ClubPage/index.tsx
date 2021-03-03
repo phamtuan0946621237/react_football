@@ -1,33 +1,18 @@
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import dayjs from 'dayjs';
 import React, { memo, useEffect, useState } from 'react';
-import { FlatList, Text, TouchableOpacity, View, Image } from 'react-native';
-import Modal from 'react-native-modal';
-import { connect, useDispatch } from 'react-redux';
-import { matchAction } from '../../../redux/action/match';
-import ListMatchComponent from './component/TableClubComponent';
-import { Navigator } from '../../../navigation'
-import style from './style'
+import { Image, Linking, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { clubAction,squadAction,fixturesAction,transferAction } from '../../../redux/action/club'
-import { ListNewsItem, ListTableItem } from '../../component'
-import TableClubComponent from './component/TableClubComponent'
-import SquadClubComponent from './component/SquadClubComponent'
-import FixturesClubComponent from './component/FixturesClubComponent'
+import { connect, useDispatch } from 'react-redux';
+import { clubAction, fixturesAction, squadAction, transferAction } from '../../../redux/action/club';
+import { ListNewsItem } from '../../component';
+import { NewsType, RouteClubType } from '../../type';
+import FixturesClubComponent from './component/FixturesClubComponent';
+import SquadClubComponent from './component/SquadClubComponent';
+import TableClubComponent from './component/TableClubComponent';
 import TransfersClubComponent from './component/TransfersClubComponent';
-export interface RouteClubType {
-    idTeam: string,
-    nameClub: string
-}
-export interface NewsType {
-    imageUrl: string,
-    lead: string,
-    page: { url: string },
-    sourceIconUrl: string,
-    sourceStr: string,
-    title: string
-}
+import {Navigator} from '../../../navigation'
+import style from './style';
+
 
 const ClubScreen = (props: any) => {
     //variable
@@ -77,19 +62,6 @@ const ClubScreen = (props: any) => {
     }
 
     useEffect(() => {
-        console.log('transferResponse',transferResponse)
-    },[transferResponse])
-
-    useEffect(() => {
-        console.log("suqadResponse",suqadResponse)
-    },[suqadResponse])
-
-    useEffect(() => {
-        console.log("fixturesResponse",fixturesResponse)
-    },[fixturesResponse])
-
-    useEffect(() => {
-        console.log("clubResponse", clubResponse)
         if (clubResponse === undefined) return
         var arrayTab: Array<string> = []
         // arrayTab.push("Table")
@@ -113,6 +85,24 @@ const ClubScreen = (props: any) => {
     function _onClickClub(id : string,name : string) {
         _callAPI(id,name)
     }
+    function onClickDetailNew(url : string) {
+        console.log("url.slice(0,4)",url.slice(0,4))
+        if (url.slice(0,4) === "http") {
+            Linking.openURL(url);
+        }else {
+            Linking.openURL("https://www.fotmob.com" + url);
+        }
+    }
+    function _onClickPlayer(id : number) {
+        navigation.navigate(Navigator.playerRoute,{idPlayer : id})
+    }
+
+    function onClickMatches(id : number) {
+        navigation.navigate(Navigator.matchDetailRoute,{matchId : id})
+    }
+    // function _onClickTransfer(id : number) {
+    //     navigation.navigate(Navigator.playerRoute,{idPlayer : id})
+    // }
     //layout
     function _buildMainView(feature: string) {
         switch (feature) {
@@ -125,7 +115,7 @@ const ClubScreen = (props: any) => {
                             tableData = {clubResponse.tableData.tables && clubResponse.tableData.tables[0].table}
                             tableHeader = {clubResponse.tableData.tableHeader && clubResponse.tableData.tableHeader.staticTableHeaders}
                             otherLeague = {clubResponse.tableData.tables && clubResponse.tableData.tables[1] && clubResponse.tableData.tables[1].tables}
-                            otherLeagueName = {clubResponse.tableData.tables && clubResponse.tableData.tables[1].leagueName}
+                            otherLeagueName = {clubResponse.tableData.tables && clubResponse.tableData.tables[1] && clubResponse.tableData.tables[1].leagueName}
                             mainLeagueName = {clubResponse.tableData.tables && clubResponse.tableData.tables[0].leagueName}
                             />
                         }
@@ -138,7 +128,7 @@ const ClubScreen = (props: any) => {
                             return (
                                 <ListNewsItem
                                     key={index}
-                                    onClick={() => onClickDetailNews(index)}
+                                    onClick={() => onClickDetailNew(item.page.url)}
                                     describle={item.title}
                                     icon={item.imageUrl}
                                     source={item.sourceStr}
@@ -150,11 +140,20 @@ const ClubScreen = (props: any) => {
                     </View>
                 )
             case "Squad":
-                return <SquadClubComponent data={suqadResponse && suqadResponse.squad ?suqadResponse.squad : [] }/>
+                return <SquadClubComponent 
+                data={suqadResponse && suqadResponse.squad ?suqadResponse.squad : [] }
+                onClickPlayer = {_onClickPlayer}
+                />
             case "Fixtures":
-                return <FixturesClubComponent fixturesData={Object.values(fixturesResponse && fixturesResponse.fixturesTab ?  fixturesResponse.fixturesTab.fixtures : [])}/>
+                return <FixturesClubComponent 
+                fixturesData={Object.values(fixturesResponse && fixturesResponse.fixturesTab ?  fixturesResponse.fixturesTab.fixtures : [])}
+                onClickMatches={onClickMatches}
+                />
             case "Transfers":
-                return <TransfersClubComponent idclub={routeParams.idTeam} transferData={Object.values(transferResponse && transferResponse.transfers && transferResponse.transfers.data)}/>
+                return <TransfersClubComponent 
+                idclub={routeParams.idTeam} transferData={Object.values(transferResponse && transferResponse.transfers && transferResponse.transfers.data)}
+                onClickTransfer={_onClickPlayer}
+                />
             default:
                 break
         }

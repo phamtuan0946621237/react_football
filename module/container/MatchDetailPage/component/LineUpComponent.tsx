@@ -1,19 +1,23 @@
 import React, { memo } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View,TouchableOpacity } from 'react-native';
 
 interface LineUpComponentType {
   benchHome: Array<LineUpType>,
   benchAway: Array<LineUpType>,
   coachesHome: Array<LineUpType>,
   coachesAway: Array<LineUpType>
+  onClickPlayer ?: (id : number) => void
 }
 interface LineUpType {
   imageUrl: string,
+  id : string,
   name: { firstName: string, lastName: string }
 }
 
 const LineUpComponent = (props: LineUpComponentType) => {
-  
+    function onclick(id : string) {
+      if (props.onClickPlayer) props.onClickPlayer(parseInt(id))
+    }
   // component
   function _buildItem(title: string,home : Array<LineUpType>,away : Array<LineUpType>) {
     return (
@@ -23,10 +27,10 @@ const LineUpComponent = (props: LineUpComponentType) => {
           <View style={style.playerClub}>
             {home.map((item: LineUpType, index: number) => {
               return (
-                <View key={index} style={style.playerItemContainer}>
+                <TouchableOpacity key={index} style={style.playerItemContainer} onPress={() => onclick(item.id)}>
                   <Image style={{ width: 40, height: 40, marginBottom: 10 }} source={{ uri: item.imageUrl }} />
                     <Text>{item.name.firstName} {item.name.lastName}</Text>
-                </View>
+                </TouchableOpacity>
               )
             })}
           </View>
@@ -34,10 +38,10 @@ const LineUpComponent = (props: LineUpComponentType) => {
           <View style={style.playerClub}>
             {away.map((item: LineUpType, index: number) => {
               return (
-                <View key={index} style={style.playerItemContainer}>
+                <TouchableOpacity key={index} style={style.playerItemContainer} onPress={() => onclick(item.id)}>
                   <Image style={{ width: 40, height: 40, marginBottom: 10 }} source={{ uri: item.imageUrl }} />
                   <Text>{item.name.firstName} {item.name.lastName}</Text>
-                </View>
+                </TouchableOpacity>
               )
             })}
           </View>

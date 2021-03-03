@@ -1,29 +1,9 @@
 import React, { memo } from 'react';
 import {
-  Text,
-  Image,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-  ImageSourcePropType
+  Image,StyleSheet, Text,TouchableOpacity, View
 } from 'react-native';
+import { ListTableItemType } from '../type';
 
-export interface ListTableItemType {
-  isShowIcon ?: boolean,
-  name : string,
-  played : number | string,
-  wins : number | string,
-  draws : number | string,
-  losses : number | string,
-  goalConDiff : number | string,
-  pts : number | string,
-  id ?: number,
-  stt ?: number | string,
-  key : any,
-  pageUrl ?: string,
-  onClick ?: () => void
-}
 
 const ListTableItem = (props: ListTableItemType) => {
 
@@ -36,7 +16,7 @@ const ListTableItem = (props: ListTableItemType) => {
           : null
         }
 
-      <Text style={style.team}>{props.name}</Text>
+      <Text style={style.team} numberOfLines={1}>{props.name}</Text>
       </View>
       <Text style={style.info}>{props.played}</Text>
       <Text style={style.info}>{props.wins}</Text>
