@@ -17,6 +17,7 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* Football_reactnativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* Football_reactnativeTests.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		8467E14625F0938300B45E68 /* beckham.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8467E14525F0938300B45E68 /* beckham.jpg */; };
 		9834C6D6D530DC5D40353011 /* libPods-Football_reactnative-Football_reactnativeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 72F310FEBE656F5B44A6C210 /* libPods-Football_reactnative-Football_reactnativeTests.a */; };
 		A458C55CB42C98E8D8D05A62 /* libPods-Football_reactnative-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6E2D1B341C07A4364F934C /* libPods-Football_reactnative-tvOS.a */; };
 		ABE74297052C3D001BC246C2 /* libPods-Football_reactnative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D11CC5D9AAD9FE4348A0F4 /* libPods-Football_reactnative.a */; };
@@ -64,6 +65,7 @@
 		72F310FEBE656F5B44A6C210 /* libPods-Football_reactnative-Football_reactnativeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Football_reactnative-Football_reactnativeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Football_reactnative/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8281FD44D0CBB4A5602C1BC5 /* Pods-Football_reactnative-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Football_reactnative-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Football_reactnative-tvOS/Pods-Football_reactnative-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		8467E14525F0938300B45E68 /* beckham.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = beckham.jpg; sourceTree = "<group>"; };
 		C162E073EA4C0FE451362022 /* Pods-Football_reactnative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Football_reactnative.release.xcconfig"; path = "Target Support Files/Pods-Football_reactnative/Pods-Football_reactnative.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -125,6 +127,7 @@
 		13B07FAE1A68108700A75B9A /* Football_reactnative */ = {
 			isa = PBXGroup;
 			children = (
+				8467E14525F0938300B45E68 /* beckham.jpg */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -161,7 +164,6 @@
 				3094C1F3C1D48125E3B36A6A /* Pods-Football_reactnative-tvOSTests.debug.xcconfig */,
 				0FEDFE9E9721525ED731E6AD /* Pods-Football_reactnative-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -342,6 +344,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				8467E14625F0938300B45E68 /* beckham.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
