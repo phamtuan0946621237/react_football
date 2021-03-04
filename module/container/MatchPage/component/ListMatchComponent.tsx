@@ -1,12 +1,5 @@
 import React, { memo } from 'react';
-import {
-  Text,
-  Image,
-  View,
-  StyleSheet,
-  TouchableOpacity
-} from 'react-native';
-
+import {Image,StyleSheet, Text,TouchableOpacity, View} from 'react-native';
 
 interface ListMatchComponent {
   items :  Array<ListMatchesItem>,
@@ -38,7 +31,7 @@ export interface StatusListMatchesItem {
 }
 
 const ListMatchComponent = (props: ListMatchComponent) => {
-
+  // action
   function _buildMatchItem(nameHome : string,iconHome : number,result : string,awayNameClub : string,iconAway : number,_onClick : () => void) {
     return (
       <TouchableOpacity style={styles.itemMatch} onPress={_onClick}>
@@ -60,8 +53,9 @@ const ListMatchComponent = (props: ListMatchComponent) => {
   function _onClick(index : number) {
     props.onClick(index)
   }
-  return (
 
+  // layout
+  return (
     <View>
       <View style={styles.section}>
       <Text>{props.nameLeague}</Text>

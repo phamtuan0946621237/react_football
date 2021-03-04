@@ -1,22 +1,14 @@
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import dayjs from 'dayjs';
 import React, { memo, useEffect, useState } from 'react';
-import { FlatList, Text,Linking, TouchableOpacity, View, Image, TextInput, Keyboard, TextInputChangeEventData, NativeSyntheticEvent, TextInputEndEditingEventData } from 'react-native';
-import Modal from 'react-native-modal';
-import { connect, useDispatch } from 'react-redux';
-import { matchAction } from '../../../redux/action/match';
-import { Navigator } from '../../../navigation'
-import { searchAction } from '../../../redux/action/search';
-import { useSafeArea } from 'react-native-safe-area-context';
-import InfoPlayerComponent from './component/InfoPlayerComponent'
-import style from './style'
+import { Image, Linking, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { connect, useDispatch } from 'react-redux';
 import { playerAction } from '../../../redux/action/player';
-import CareerComponent from './component/CareerComponent';
-import { ListNewsItem } from '../../component'
+import { ListNewsItem } from '../../component';
 import { NewsType } from '../../type';
-
+import CareerComponent from './component/CareerComponent';
+import InfoPlayerComponent from './component/InfoPlayerComponent';
+import style from './style';
 
 const PlayerPage = (props: any) => {
     //variable
@@ -32,17 +24,11 @@ const PlayerPage = (props: any) => {
         dispatch(playerAction({ id: route.idPlayer }))
     }, [])
 
-    useEffect(() => {
-        if (playerResponse === undefined) return
-        console.log("playerResponse", playerResponse)
-    }, [playerResponse])
-
     //action 
     function _chooseType(index: number) {
         setSelectedTypeIndex(index)
     }
     function onClickDetailNew(url : string) {
-        console.log("url.slice(0,4)",url.slice(0,4))
         if (url.slice(0,4) === "http") {
             Linking.openURL(url);
         }else {
@@ -78,7 +64,6 @@ const PlayerPage = (props: any) => {
                 )
             default:
                 break;
-
         }
     }
     //layout
@@ -94,7 +79,6 @@ const PlayerPage = (props: any) => {
                     </View>
                 </View>
             </View>
-
             <ScrollView horizontal={true} style={style.scrollContainer} showsHorizontalScrollIndicator={false}>
                 {typePlayer.map((item: string, index: number) => {
                     return (
@@ -105,8 +89,6 @@ const PlayerPage = (props: any) => {
                 })}
             </ScrollView>
             {_buildMainView()}
-
-
         </ScrollView>
     )
 }

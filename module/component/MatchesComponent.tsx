@@ -1,13 +1,5 @@
 import React, { memo } from 'react';
-import {
-  Text,
-  Image,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-  ImageSourcePropType
-} from 'react-native';
+import {Image,StyleSheet, Text,TouchableOpacity, View} from 'react-native';
 
 interface MatchesComponentType {
   onClick?: () => void
@@ -19,7 +11,6 @@ interface MatchesComponentType {
 }
 
 const MatchesItemComponent = (props: MatchesComponentType) => {
-  // const {onClick,nameHome,result,iconHome,iconAway,awayNameClub} = props
   return (
     <TouchableOpacity style={styles.itemMatch} onPress={props.onClick}>
           <View style={[styles.infoTeam,{justifyContent : "flex-end"}]}>

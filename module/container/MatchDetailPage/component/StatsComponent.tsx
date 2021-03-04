@@ -1,7 +1,5 @@
 import React, { memo } from 'react';
-import {
-  StyleSheet, Text,View
-} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 interface StatsComponentType {
   statsData: Array<StatsSectionType>
@@ -18,8 +16,9 @@ interface StatsRowType {
   type: string
 }
 
-
 const StatsComponent = (props: StatsComponentType) => {
+
+  // layout
   return (
     <View>
       <Text style={style.title}>Top Stats</Text>

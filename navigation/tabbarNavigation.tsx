@@ -2,19 +2,12 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import MatchPage from '../module/container/matchPage'
 import MacthStack from './navigation'
 import LeagueStack from './leaguenavigation'
 import SearchStack from './searchNavigation'
+import NewsStack from './newsNavigation'
+import AboutUsStack from './aboutUsNavigation'
 const TabbarNavigation = () => {
-
-    function SettingsScreen() {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>Settings!</Text>
-            </View>
-        );
-    }
 
     const BottomTab = createBottomTabNavigator();
     return (
@@ -23,6 +16,8 @@ const TabbarNavigation = () => {
                 <BottomTab.Screen name="MacthStack" component={MacthStack} options={{title : "Match"}}/>
                 <BottomTab.Screen name="LeagueStack" component={LeagueStack} options={{title : "League"}}/>
                 <BottomTab.Screen name="SearchStack" component={SearchStack} options={{title : "Search"}}/>
+                <BottomTab.Screen name="NewsStack" component={NewsStack} options={{title : "News"}}/>
+                <BottomTab.Screen name="AboutUsStack" component={AboutUsStack} options={{title : "AboutUs"}}/>
             </BottomTab.Navigator>
         </NavigationContainer>
     )

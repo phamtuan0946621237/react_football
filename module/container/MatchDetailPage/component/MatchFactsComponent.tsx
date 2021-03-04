@@ -1,12 +1,5 @@
 import React, { memo } from 'react';
-import {
-  Text,
-  Image,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions
-} from 'react-native';
+import {Dimensions, Image,StyleSheet, Text,TouchableOpacity, View} from 'react-native';
 
 interface MatchFactsComponentType {
   playerOfTheMatch: PlayerOfTheMatchType
@@ -53,6 +46,8 @@ interface PlayerOfTheMatchType {
 }
 
 const MatchFactsComponent = (props: MatchFactsComponentType) => {
+
+  //action
   function _buildInfoMatch(title: string, value: string) {
     return (
       <View style={style.infoMatch}>
@@ -81,7 +76,6 @@ const MatchFactsComponent = (props: MatchFactsComponentType) => {
     if (props.onClickOpenBrower) props.onClickOpenBrower(url)
   }
   function onClickClub(pageUrl : string) {
-    console.log("pageUrl",pageUrl)
     var first = pageUrl.slice(7)
       var index = first.indexOf("/")
       var id = first.slice(0, index)
@@ -89,6 +83,8 @@ const MatchFactsComponent = (props: MatchFactsComponentType) => {
       var name = second.slice(10, first.length)
     if (props.onClickClub) props.onClickClub(id,name)
   }
+
+  // layout
   return (
     <View>
       {/* youtube */}

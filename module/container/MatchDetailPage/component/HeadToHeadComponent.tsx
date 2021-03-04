@@ -1,8 +1,6 @@
 import React, { memo } from 'react';
-import {
-  StyleSheet, Text, View, Image
-} from 'react-native';
-import { StatusListMatchesItem } from '../../MatchPage/component/ListMatchComponent'
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { StatusListMatchesItem } from '../../MatchPage/component/ListMatchComponent';
 interface HeadToHeadComponentType {
   h2h: H2hType
 }
@@ -19,8 +17,8 @@ interface MatchH2hType {
   time: string
 }
 
-
 const HeadToHeadComponent = (props: HeadToHeadComponentType) => {
+  // view
   return (
     <View>
       <View style={style.headToHeadContainer}>

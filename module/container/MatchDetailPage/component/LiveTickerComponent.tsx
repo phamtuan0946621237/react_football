@@ -23,10 +23,12 @@ export interface LiveTickerItemType {
 }
 
 const LiveTickerComponent = (props: LiveTickerComponentType) => {
-
+  // action 
   function onClickPlayer(id ?: number) {
     if (props.onClickPlayer && id !== undefined) props.onClickPlayer(id)
   }
+
+  //component
   function _buildCardView(item : LiveTickerItemType) {
     return (
       <TouchableOpacity style={style.infoCardContainer} onPress={() => onClickPlayer(item.Players && item.Players[0].Id)}>
@@ -70,6 +72,8 @@ const LiveTickerComponent = (props: LiveTickerComponentType) => {
       </View>
     )
   }
+
+  // layout
   return (
     <View >
       {props.livetickerData && props.livetickerData.map((item: LiveTickerItemType, index: number) => {

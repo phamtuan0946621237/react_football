@@ -14,7 +14,7 @@ import {Navigator} from '../../../navigation'
 import style from './style';
 
 
-const ClubScreen = (props: any) => {
+const ClubScreen = (props : any) => {
     //variable
     const { clubResponse ,suqadResponse,fixturesResponse,transferResponse} = props
     const dispatch = useDispatch()
@@ -28,6 +28,21 @@ const ClubScreen = (props: any) => {
         return () => { };
     }, [])
 
+    useEffect(() => {
+        if (clubResponse === undefined) return
+        var arrayTab: Array<string> = []
+        // arrayTab.push("Table")
+        if (clubResponse.tabs !== undefined) {
+            for (let i = 0; i < clubResponse.tabs.length; i++) {
+                if (clubResponse.tabs[i] !== "Overview") {
+                    arrayTab.push(clubResponse.tabs[i])
+                }
+            }
+            setType(arrayTab)
+        }
+    }, [clubResponse])
+
+    // action 
     function _callAPI(id : string,name : string) {
         dispatch(clubAction({
             id: id,
@@ -60,33 +75,16 @@ const ClubScreen = (props: any) => {
             seo: name
         }))
     }
-
-    useEffect(() => {
-        if (clubResponse === undefined) return
-        var arrayTab: Array<string> = []
-        // arrayTab.push("Table")
-        if (clubResponse.tabs !== undefined) {
-            for (let i = 0; i < clubResponse.tabs.length; i++) {
-                if (clubResponse.tabs[i] !== "Overview") {
-                    arrayTab.push(clubResponse.tabs[i])
-                }
-            }
-            setType(arrayTab)
-        }
-    }, [clubResponse])
-
-    // action 
     function _chooseType(index: number) {
         setSelectedTypeIndex(index)
     }
-    function onClickDetailNews(index: number) {
-        console.log("index_news", index)
-    }
+    // function onClickDetailNews(index: number) {
+        // console.log("index_news", index)
+    // }
     function _onClickClub(id : string,name : string) {
         _callAPI(id,name)
     }
     function onClickDetailNew(url : string) {
-        console.log("url.slice(0,4)",url.slice(0,4))
         if (url.slice(0,4) === "http") {
             Linking.openURL(url);
         }else {
@@ -158,6 +156,7 @@ const ClubScreen = (props: any) => {
                 break
         }
     }
+    // Layout 
     if (clubResponse === undefined) return
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -172,7 +171,6 @@ const ClubScreen = (props: any) => {
 
             {/* feature */}
             <ScrollView horizontal={true} style={style.scrollContainer} showsHorizontalScrollIndicator={false}>
-                {/* {clubResponse && clubResponse.tabs.map((item : string,index : number) => { */}
                 {type.map((item: string, index: number) => {
                     return (
                         <TouchableOpacity key={index} onPress={() => _chooseType(index)} style={[style.scrollItem, { borderBottomWidth: index === selectedTypeIndex ? 2 : 0 }]}>
@@ -182,7 +180,6 @@ const ClubScreen = (props: any) => {
                 })}
 
             </ScrollView>
-
             {/* main View */}
             {_buildMainView(type[selectedTypeIndex])}
 

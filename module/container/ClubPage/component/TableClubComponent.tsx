@@ -1,19 +1,10 @@
 import React, { memo } from 'react';
-import {
-  Text,
-  Image,
-  View,
-  StyleSheet,
-  TouchableOpacity
-} from 'react-native';
-import { ListTableItem } from '../../../component'
-import {TableClubComponentType,OtherLeagueType,ListTableItemType} from '../../../type'
-
-
-
+import {StyleSheet, Text,View} from 'react-native';
+import { ListTableItem } from '../../../component';
+import { ListTableItemType, OtherLeagueType, TableClubComponentType } from '../../../type';
 
 const TableClubComponent = (props: TableClubComponentType) => {
-
+  // action
   function _onClickClub(pageUrl ?: string) {
     if (pageUrl !== undefined) {
       var first = pageUrl.slice(7)
@@ -22,9 +13,10 @@ const TableClubComponent = (props: TableClubComponentType) => {
       var second = first.slice(index, first.length)
       var name = second.slice(10, first.length)
       props.onClickClub(id,name)
-    }
-    
+    } 
   }
+
+  // main
   return (
     <View style={style.container}>
       <Text style={style.titleLeague}>{props.mainLeagueName}</Text>

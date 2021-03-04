@@ -1,12 +1,8 @@
 import React, { memo } from 'react';
-import {
-  StyleSheet, Text,
-
-  View
-} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import MatchesItem from '../../../component/MatchesComponent';
 import { MatchesItemType } from '../../../type';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 interface MatchesComponentType {
@@ -14,10 +10,12 @@ interface MatchesComponentType {
   onClick : (id ?: string) => void
 }
 const MatchesComponent = (props: MatchesComponentType) => {
-
+  // aciton 
   function _onClickDetail(item : MatchesItemType) {
     props.onClick(item.id)
   }
+
+  // layout
   return (
     <View>
       {Object.values(props.data).map((itemGrand: MatchesItemType[][], indexGrand: number) => {

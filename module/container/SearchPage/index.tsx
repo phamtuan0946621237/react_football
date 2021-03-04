@@ -1,20 +1,13 @@
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from '@react-navigation/native';
-import dayjs from 'dayjs';
 import React, { memo, useEffect, useState } from 'react';
-import { FlatList, Text, TouchableOpacity, View, Image, TextInput, Keyboard, TextInputChangeEventData, NativeSyntheticEvent, TextInputEndEditingEventData } from 'react-native';
-import Modal from 'react-native-modal';
-import { connect, useDispatch } from 'react-redux';
-import { matchAction } from '../../../redux/action/match';
-import { Navigator } from '../../../navigation'
-import { searchAction } from '../../../redux/action/search';
-import { useSafeArea } from 'react-native-safe-area-context';
-import SearchComponent from './component/SearchComponent'
-import style from './style'
+import { Image, NativeSyntheticEvent, Text, TextInput, TextInputChangeEventData, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { SearchNavigator } from '../../../navigation'
+import { connect, useDispatch } from 'react-redux';
+import { SearchNavigator } from '../../../navigation';
 import { leagueAction } from '../../../redux/action/league';
-// import {RouteLeague} from '../../type'
+import { searchAction } from '../../../redux/action/search';
+import style from './style';
+
 export interface RouteLeague {
     id: string,
     name: string
@@ -55,7 +48,6 @@ const SearchPage = (props: any) => {
                 a.push(Object.values(searchResponse)[i])
                 b.push(Object.keys(searchResponse)[i])
             }
-
         }
         setData(a)
         setKey(b)
@@ -64,13 +56,10 @@ const SearchPage = (props: any) => {
     useEffect(() => {
         if (!leagueResponse) return
         if (!idLeague) return
-        console.log("idLeague", idLeague)
         if (leagueResponse.countries) {
             for (var i = 0; i < leagueResponse.countries.length; i++) {
                 if (leagueResponse.countries[i].leagues) {
                     for (var j = 0; j < leagueResponse.countries[i].leagues.length; j++) {
-                        console.log("leagueResponse.countries[i].leagues[j] : ", leagueResponse.countries[i].leagues[j].id)
-                        console.log("hieu", leagueResponse.countries[i].leagues[j].id - parseInt(idLeague))
                         if (leagueResponse.countries[i].leagues[j].id - parseInt(idLeague) === 0) {
                             var url = leagueResponse.countries[i].leagues[j].pageUrl
                             var first = url.slice(9)
@@ -81,10 +70,6 @@ const SearchPage = (props: any) => {
                             navigation.navigate(SearchNavigator.leagueDetailRoute, { id: id, name: name } as RouteLeague)
                             return
                         }
-                        // if (leagueResponse.countries[i].leagues[j].id === parseInt(idLeague)) {
-
-                        //     // console.log("url",leagueResponse.countries[i].leagues[j].pageUrl)
-                        // }
                     }
                 }
             }
@@ -103,7 +88,6 @@ const SearchPage = (props: any) => {
     }
 
     function onClickDetail(type: string, id: string) {
-        console.log("id", id, " - ", "type", type)
         switch (type) {
             case "squadMemberSuggest":
                 navigation.navigate(SearchNavigator.playerRoute, { idPlayer: id })
@@ -114,8 +98,6 @@ const SearchPage = (props: any) => {
             case "leagueSuggest":
                 dispatch(leagueAction({}))
                 setIdLeague(id)
-
-            // navigation.navigate(SearchNavigator.matchDetailRoute,{matchId : id})
             default:
                 break
         }
@@ -153,7 +135,6 @@ const SearchPage = (props: any) => {
                                 </TouchableOpacity>
                             )
                         })
-
                         }
                     </View>
                 )

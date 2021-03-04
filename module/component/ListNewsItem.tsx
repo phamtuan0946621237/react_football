@@ -1,13 +1,5 @@
 import React, { memo } from 'react';
-import {
-  Text,
-  Image,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-  ImageSourcePropType
-} from 'react-native';
+import {Dimensions, Image,StyleSheet, Text,TouchableOpacity, View} from 'react-native';
 
 interface ListNewsItemType {
   onClick?: () => void

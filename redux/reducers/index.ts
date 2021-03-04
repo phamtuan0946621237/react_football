@@ -7,6 +7,7 @@ import club from './club'
 import league from './league'
 import search from './search'
 import player from './player'
+import news from './news'
 // const keyConfig = {
 //     key: 'rootStorage',
 //     storage: AsyncStorage,
@@ -16,5 +17,6 @@ export default combineReducers({
     club,
     league,
     search,
-    player
+    player,
+    news
 })

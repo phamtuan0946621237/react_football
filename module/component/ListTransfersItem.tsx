@@ -1,13 +1,5 @@
 import React, { memo } from 'react';
-import {
-  Text,
-  Image,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-  ImageSourcePropType
-} from 'react-native';
+import {Image,StyleSheet, Text,TouchableOpacity, View} from 'react-native';
 
 export interface ListTableItemType {
   key: any,

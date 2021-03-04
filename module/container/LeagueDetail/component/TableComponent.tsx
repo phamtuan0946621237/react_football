@@ -1,11 +1,10 @@
 import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ListTableItem } from '../../../component';
-import { ListTableItemType, TableClubComponentType, OtherLeagueType } from '../../../type';
-
+import { ListTableItemType, TableClubComponentType } from '../../../type';
 
 const TableClubComponent = (props: TableClubComponentType) => {
-
+  // action
   function _onClickClub(pageUrl?: string) {
     if (pageUrl !== undefined) {
       var first = pageUrl.slice(7)
@@ -17,6 +16,7 @@ const TableClubComponent = (props: TableClubComponentType) => {
     }
   }
 
+  // layout
   return (
     <View style={style.container}>
       <ListTableItem key={"header"} name={props.tableHeader[1]} stt={props.tableHeader[0]} played={props.tableHeader[2]} wins={props.tableHeader[3]} draws={props.tableHeader[4]} losses={props.tableHeader[5]} goalConDiff={props.tableHeader[6]} pts={props.tableHeader[7]} />
@@ -28,7 +28,6 @@ const TableClubComponent = (props: TableClubComponentType) => {
           )
         }) 
       }
-
     </View>
   );
 };

@@ -44,7 +44,7 @@ const MatchDetailPage = (props: any) => {
                 setLiveTickerData(response.Events)
             })
             .catch(err => {
-                console.log(err);
+                // console.log(err);
             });
     }, [macthDetailResponse])
 
@@ -52,7 +52,6 @@ const MatchDetailPage = (props: any) => {
     // action 
     function _selectedType(index: number) {
         setSelectedIndexType(index)
-
     }
     function _onClickClub(pageUrl?: string) {
         if (pageUrl !== undefined) {
@@ -75,6 +74,7 @@ const MatchDetailPage = (props: any) => {
         navigation.navigate(Navigator.clubRoute, { idTeam: id, nameClub: name } as RouteClubType)
     }
     var team = macthDetailResponse && macthDetailResponse.header && macthDetailResponse.header.teams
+
     //layout
     return (
         <ScrollView style={{ backgroundColor: 'white' }}>
@@ -90,7 +90,6 @@ const MatchDetailPage = (props: any) => {
                     {macthDetailResponse !== undefined && macthDetailResponse.header && macthDetailResponse.header.status.scoreStr && macthDetailResponse.header.status.started === false ?
                         <Text style={{ fontSize: 12, marginTop: 5 }}>{macthDetailResponse.header.status.startDateStr}</Text> : null
                     }
-
                 </View>
                 <TouchableOpacity style={style.infoTeam} onPress={() => _onClickClub(team[1].pageUrl)}>
                     <Image style={{ width: 60, height: 60 }} source={{ uri: `https://www.fotmob.com${macthDetailResponse !== undefined && macthDetailResponse?.header && macthDetailResponse?.header?.teams && macthDetailResponse?.header?.teams[1].imageUrl}` }} />
@@ -144,7 +143,6 @@ const MatchDetailPage = (props: any) => {
                                             coachesHome={macthDetailResponse && macthDetailResponse.content && macthDetailResponse.content.lineup && macthDetailResponse.content.lineup.coaches && macthDetailResponse.content.lineup.coaches[0]}
                                             onClickPlayer={_onClickPlayer}
                                         /> : null
-
                     }
                 </View>
             }

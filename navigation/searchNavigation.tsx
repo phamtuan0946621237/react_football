@@ -1,12 +1,11 @@
 import { createStackNavigator, StackNavigationOptions } from '@react-navigation/stack';
 import React from 'react';
 import { Platform } from 'react-native';
+import ClubPage from '../module/container/ClubPage';
+import LeagueDetailPage from '../module/container/LeagueDetail';
+import MatchDetailPage from '../module/container/MatchDetailPage';
+import PlayerPage from '../module/container/Player';
 import SearchPage from '../module/container/SearchPage';
-// import ClubPage from '../module/container/ClubPage'
-import MatchDetailPage from '../module/container/MatchDetailPage'
-import ClubPage from '../module/container/ClubPage'
-import PlayerPage from '../module/container/Player'
-import LeagueDetailPage from '../module/container/LeagueDetail'
 const Stack = createStackNavigator();
 
 export const searchRoute = 'SearchRoute';
@@ -32,14 +31,12 @@ function SearchStack() {
 export default SearchStack
 
 export const ScreenOptions: StackNavigationOptions = {
-    // headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
     headerTintColor: "black",
     headerBackTitleVisible: false,
     headerTitleAlign: 'center',
     headerTitleStyle: {
       paddingHorizontal: 16
     },
-    // headerBackground : 'white',
     headerLeftContainerStyle: {
       paddingHorizontal: Platform.OS == 'ios' ? 16 : 0,
     },

@@ -67,24 +67,19 @@ const LeaguePage = (props: any) => {
                                                     <Text onPress = {() => onClick(itemLeague.pageUrl)} key={indexLeague} style={{ paddingVertical: 8 }}>{itemLeague.name}</Text>
                                                 )
                                             })}
-
                                         </View>
                                     )
                                 })}
                         </View>
                     )
                 }
-
             })}
-
-
         </ScrollView>
     )
 }
 const mapStateToProps = (state: any) => {
     return {
         leagueResponse: state.league.leagueResponse
-        // macthResponse: state.match.matchResponse
     };
 };
 

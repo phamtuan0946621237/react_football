@@ -1,20 +1,19 @@
 import React, { memo, useState } from 'react';
-import { StyleSheet, View, Text, Image,TouchableOpacity } from 'react-native';
-import ListTransfersItem from '../../../component/ListTransfersItem';
-import { TransferType } from '../../../type';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { useSafeArea } from 'react-native-safe-area-context';
 
 export interface StatsComponentType {
   dataStats: any
   onClickPlayer ?: (id : number) => void
   onClickTeam ?: (id : number) => void
 }
+
 interface StatsItemType {
   header: string,
   fetchAllUrl: string,
   topThree: Array<TopThreePlayerType>
 }
+
 interface TopThreePlayerType {
   id: number,
   name: string,
@@ -30,8 +29,10 @@ interface TrophiesType {
 }
 
 const StatsComponent = (props: StatsComponentType) => {
+  // variable
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
+  //action
   function _onClickChooseType(index: number) {
     setSelectedIndex(index)
   }
@@ -42,6 +43,7 @@ const StatsComponent = (props: StatsComponentType) => {
     if (props.onClickTeam) props.onClickTeam(id)
   }
 
+  // component
   function _buildPlayerItem(name: string, idPlayer: number, club: string, idClub: number, result: string) {
     return (
       <TouchableOpacity style={style.itemContainer} onPress={() => onclickPlayer(idPlayer)}>
@@ -179,7 +181,6 @@ const StatsComponent = (props: StatsComponentType) => {
             </View>
           )
         })}
-
       </View>
 
     )
@@ -188,7 +189,6 @@ const StatsComponent = (props: StatsComponentType) => {
   function TrophiesView() {
     return (
       <View>
-        {/* {props.dataStats && props.dataStats} */}
         {props.dataStats && props.dataStats.trophies.map((item: TrophiesType, index: number) => {
           return (
             <View key ={index} style={{ padding: 16, }}>
@@ -197,12 +197,11 @@ const StatsComponent = (props: StatsComponentType) => {
             </View>
           )
         })}
-
-
       </View>
     )
   }
 
+  // main View
   return (
     <View style={style.container}>
       <ScrollView horizontal={true} style={{ backgroundColor: 'white', borderTopWidth: 1, borderColor: '#E5E5E5', borderBottomWidth: 1, }}>

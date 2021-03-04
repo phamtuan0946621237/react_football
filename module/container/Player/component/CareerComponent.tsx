@@ -1,13 +1,5 @@
 import React, { memo } from 'react';
-import {
-  Text,
-  Image,
-  View,
-  StyleSheet,
-  TouchableOpacity
-} from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
-// import style from '../../MatchDetailPage/style';
+import {Image,StyleSheet, Text,View} from 'react-native';
 
 interface CareerComponentType {
   careerData: Array<CareerItemType>[]
@@ -25,6 +17,7 @@ interface CareerItemType {
 }
 
 const CareerComponent = (props: CareerComponentType) => {
+  // layout
   return (
     <View>
       <View style={style.titleContainer}>
@@ -49,12 +42,9 @@ const CareerComponent = (props: CareerComponentType) => {
                 </View>
               )
             })}
-
-
           </View>
         )
       })}
-
     </View>
   );
 };

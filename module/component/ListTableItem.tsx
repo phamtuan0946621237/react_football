@@ -1,7 +1,5 @@
 import React, { memo } from 'react';
-import {
-  Image,StyleSheet, Text,TouchableOpacity, View
-} from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ListTableItemType } from '../type';
 
 

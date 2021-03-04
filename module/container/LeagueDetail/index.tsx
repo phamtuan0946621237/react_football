@@ -1,24 +1,18 @@
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import dayjs from 'dayjs';
 import React, { memo, useEffect, useState } from 'react';
-import { FlatList, Linking,Text, TouchableOpacity, View, Image, ScrollView } from 'react-native';
-import Modal from 'react-native-modal';
+import { Image, Linking, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
-import { matchAction } from '../../../redux/action/match';
-import TableComponent from './component/TableComponent';
-import { Navigator, LeagueNavigator } from '../../../navigation'
-import { RouteLeague } from '../League'
-import { leagueDetailAction, statsLeagueAction } from '../../../redux/action/league';
-import style from './style'
+import { LeagueNavigator } from '../../../navigation';
+import { leagueDetailAction, matchesLeagueAction, statsLeagueAction, transferAction } from '../../../redux/action/league';
 import { ListNewsItem } from '../../component';
-import { NewsType } from '../../type'
-import { transferAction,matchesLeagueAction } from '../../../redux/action/league';
-import TransferComponent from './component/TransferComponent'
-import MatchesComponent from './component/MatchesComponent'
+import { NewsType, RouteClubType } from '../../type';
+import { RouteLeague } from '../League';
+import MatchesComponent from './component/MatchesComponent';
 import StatsComponent from './component/StatsComponent';
-import {RouteClubType} from '../../type'
-import { leagueRoute } from '../../../navigation/leaguenavigation';
+import TableComponent from './component/TableComponent';
+import TransferComponent from './component/TransferComponent';
+import style from './style';
+
 const LeagueDetailPage = (props: any) => {
     //variable
     const { leagueDetailResponse, transferResponse ,macthesResponse,statsResponse} = props
@@ -111,9 +105,7 @@ const LeagueDetailPage = (props: any) => {
         // navigation.navigate(LeagueNavigator.clubRoute,{})
     }
 
-
-    //layout
-
+    //component
     function _buildMainView(type: string) {
         switch (type) {
             case "News":
@@ -173,6 +165,8 @@ const LeagueDetailPage = (props: any) => {
 
         }
     }
+
+    // main Layout
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={style.infoClub}>

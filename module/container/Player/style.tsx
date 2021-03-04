@@ -8,7 +8,6 @@ export default StyleSheet.create({
     borderColor : '#E5E5E5',
     borderBottomWidth : 1,
     borderTopWidth : 1,
-
 },
 infoClubText : {
     flex : 1,

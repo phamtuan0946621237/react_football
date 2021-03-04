@@ -1,11 +1,5 @@
 import React, { memo } from 'react';
-import {
-  Image,
-
-  StyleSheet, Text,
-
-  View
-} from 'react-native';
+import {Image,StyleSheet, Text,View} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface SquadClubComponentType {
@@ -20,7 +14,6 @@ interface SquadType {
   name: string
 }
 
-
 const SquadClubComponent = (props: SquadClubComponentType) => {
 
   function _onClickPlayer(id : number) {
@@ -28,7 +21,6 @@ const SquadClubComponent = (props: SquadClubComponentType) => {
   }
   return (
     <View style={{ backgroundColor: 'white', borderTopWidth: 1, borderColor: '#E5E5E5' }}>
-
       {props.data.map((item: any, index: number) => {
         return (
           <View key={index} style={style.item}>
@@ -44,15 +36,9 @@ const SquadClubComponent = (props: SquadClubComponentType) => {
                 </TouchableOpacity>
               )
             })}
-
-
-
           </View>
         )
       })}
-
-
-
     </View>
   );
 };
@@ -67,7 +53,6 @@ const style = StyleSheet.create({
     padding: 16
   },
   title: {
-    // marginBottom : 16,
     fontWeight: 'bold',
     fontSize: 16
   },

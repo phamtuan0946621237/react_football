@@ -4,11 +4,13 @@ import { CLUB_ACTION,SQUAD_ACTION,FIXTURES_ACTION,TRANSFER_ACTION } from './cons
 import { LEAGUE_ACTION,LEAGUE_DETAIL_ACTION,TRANSFER_LEAGUE_ACTION,MATCHES_LEAGUE_ACTION,STATS_LEAGUE_ACTION} from './constants/league';
 import { SEARCH_ACTION} from './constants/search';
 import { PLAYER_ACTION} from './constants/player';
+import { NEWS_ACTION} from './constants/news';
 import { _matchSaga,_matchDetailSaga } from './saga/match';
 import { _clubSaga,_squadSaga ,_fixturesSaga,_transfersSaga} from './saga/club';
 import {_leagueSaga,_leagueDetailSaga,_transfersLeagueSaga,_matchesLeagueSaga,_statsLeagueSaga} from './saga/league'
 import {_searchSaga} from './saga/search'
 import {_playerSaga} from './saga/player'
+import {_newsSaga} from './saga/news'
 
 export function* rootSaga() {
     yield takeLatest(MATCH_ACTION, _matchSaga); 
@@ -24,5 +26,6 @@ export function* rootSaga() {
     yield takeLatest(STATS_LEAGUE_ACTION, _statsLeagueSaga); 
     yield takeLatest(SEARCH_ACTION, _searchSaga); 
     yield takeLatest(PLAYER_ACTION, _playerSaga); 
+    yield takeLatest(NEWS_ACTION, _newsSaga); 
     
 }

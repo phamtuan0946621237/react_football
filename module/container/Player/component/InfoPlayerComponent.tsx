@@ -1,12 +1,5 @@
 import React, { memo } from 'react';
-import {
-  Text,
-  Image,
-  View,
-  StyleSheet,
-  TouchableOpacity
-} from 'react-native';
-// import style from '../../MatchDetailPage/style';
+import {Image,StyleSheet, Text,View} from 'react-native';
 
 interface InfoPlayerComponentType {
   playerProps: Array<PlayerPropsType>
@@ -23,7 +16,7 @@ interface PlayerPropsType {
 }
 
 const InfoPlayerComponent = (props: InfoPlayerComponentType) => {
-
+  // layout
   return (
     <View>
       <View style={style.playerPropsContainer}>
@@ -52,11 +45,9 @@ const InfoPlayerComponent = (props: InfoPlayerComponentType) => {
                 )
               }
             })}
-
           </View>
         }
       </View>
-
       <View style={style.playerPositionContainer}>
         <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Player Positions</Text>
         <Text style={{ fontWeight: '700', marginTop: 16, marginBottom: 8 }}>Primary</Text>
@@ -106,7 +97,6 @@ const InfoPlayerComponent = (props: InfoPlayerComponentType) => {
           </View>
         </View>
       }
-
     </View>
   );
 };
@@ -121,7 +111,6 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: 16,
     backgroundColor: 'white',
-    // margin: 16,
     borderBottomWidth: 1,
     borderColor: '#DEDEDE'
   },
@@ -135,14 +124,12 @@ const style = StyleSheet.create({
     margin: 16,
     borderWidth: 1,
     borderColor: '#DEDEDE',
-    // borderRadius : 12
   },
   playerPositionContainer: {
     paddingVertical: 16,
     marginHorizontal: 16,
     borderBottomWidth: 1,
     borderColor: '#DEDEDE'
-    // backgroundColor : 'white'
   },
   infoLeague: {
     flexDirection: 'row',

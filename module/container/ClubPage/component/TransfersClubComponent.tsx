@@ -1,16 +1,7 @@
 import React, { memo } from 'react';
-import {
-  Text,
-  Image,
-  View,
-  StyleSheet,
-  TouchableOpacity
-} from 'react-native';
-import { ListTableItem } from '../../../component'
-// import { ListTableItemType } from '../../../component/ListTableItem'
-import { StatusListMatchesItem } from '../../MatchPage/component/ListMatchComponent';
+import {StyleSheet, Text,View} from 'react-native';
 import ListTransfersItem from '../../../component/ListTransfersItem';
-import {TransferType,ListTableItemType} from '../../../type'
+import { TransferType } from '../../../type';
 
 interface TransfersClubComponentType {
   transferData: [TransferType][]
@@ -19,10 +10,12 @@ interface TransfersClubComponentType {
 }
 
 const TransfersClubComponent = (props: TransfersClubComponentType) => {
-
+  //action 
   function onClickTransfer(id : number) {
     if (props.onClickTransfer) props.onClickTransfer(id)
   }
+
+  // main
   return (
     <View style={style.container}>
       {props.transferData.map((items: [TransferType], i: number) => {

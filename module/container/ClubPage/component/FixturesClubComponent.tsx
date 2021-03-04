@@ -1,10 +1,5 @@
 import React, { memo } from 'react';
-import {
-  Image,
-
-  StyleSheet, Text,
-
-  View
+import {Image,StyleSheet, Text,View
 } from 'react-native';
 import { StatusListMatchesItem } from '../../MatchPage/component/ListMatchComponent';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -24,12 +19,13 @@ interface FixturesDataType {
   status: StatusListMatchesItem
 }
 
-
 const FixturesClubComponent = (props: FixturesClubComponentType) => {
-
+  // action 
   function _onClickMatches(id : number) {
     if (props.onClickMatches) props.onClickMatches(id)
   }
+
+  // main
   return (
     <View style={{ backgroundColor: 'white' }}>
       {props.fixturesData.map((itemmm: [FixturesDataType], index: number) => {
@@ -56,9 +52,7 @@ const FixturesClubComponent = (props: FixturesClubComponentType) => {
           </View>
         )
       })
-
       }
-
     </View>
   );
 };
@@ -78,7 +72,6 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 10,
-
   },
   right: {
     flex: 1,

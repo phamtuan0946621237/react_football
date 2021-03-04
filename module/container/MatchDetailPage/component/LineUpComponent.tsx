@@ -15,6 +15,7 @@ interface LineUpType {
 }
 
 const LineUpComponent = (props: LineUpComponentType) => {
+  // action 
     function onclick(id : string) {
       if (props.onClickPlayer) props.onClickPlayer(parseInt(id))
     }

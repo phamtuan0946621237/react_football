@@ -8,10 +8,12 @@ interface TransferComponentType {
   onClickTransfer ?:( id : number) => void
 }
 const TransferComponent = (props: TransferComponentType) => {
-
+  // action 
   function onClick(id : number) {
     if (props.onClickTransfer) props.onClickTransfer(id)
   }
+
+  // layout
   return (
     <View style={style.container}>
       {props.data && props.data.map((item: TransferType, index: number) => {
