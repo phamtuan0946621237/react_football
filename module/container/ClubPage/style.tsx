@@ -5,7 +5,7 @@ export default StyleSheet.create({
         flexDirection : 'row',
         padding : 16,
         backgroundColor : 'white',
-        borderColor : '#E5E5E5',
+        borderColor : 'rgba(255,145,173,0.3)',
         borderBottomWidth : 1,
         borderTopWidth : 1,
 
@@ -18,7 +18,7 @@ export default StyleSheet.create({
     },
     scrollItem : {
         padding : 16,
-        borderColor : 'green'
+        borderColor : 'rgba(255,145,173,0.3)'
     },
     scrollContainer : {
         backgroundColor : 'white',

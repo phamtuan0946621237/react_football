@@ -10,7 +10,7 @@ import StatsComponent from './component/StatsComponent'
 import HeadToHeadComponent from './component/HeadToHeadComponent'
 import LineUpComponent from './component/LineUpComponent'
 import { Navigator } from '../../../navigation'
-
+// import {showLoading,dismissLoading} from '../../../App'
 export interface RouteClubType {
     idTeam : string,
     nameClub : string
@@ -24,18 +24,22 @@ const MatchDetailPage = (props: any) => {
     const routeParams = useRoute().params as any
     const [liveTickerData, setLiveTickerData] = useState<Array<LiveTickerItemType>>()
     const [type,setType] = useState<Array<string>>([])
+
     // life cycle
     useEffect(() => {
         dispatch(matchDetailAction({
             matchId: routeParams.matchId,
             ccode3: "VNM"
         }))
-
+        
+        // showLoading()
         return () => { };
     }, [routeParams.matchId])
 
     useEffect(() => {
         if (macthDetailResponse === undefined) return
+        
+        
         fetch(`http://${macthDetailResponse.content.liveticker.url}`, {
             "method": "GET",
         })
@@ -99,8 +103,8 @@ const MatchDetailPage = (props: any) => {
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{ backgroundColor: 'white', minHeight: 50 }}>
                 {macthDetailResponse !== undefined && macthDetailResponse.nav.map((item: string, index: number) => {
                     return (
-                        <TouchableOpacity key={index} onPress={() => _selectedType(index)} style={{ paddingVertical: 16, paddingHorizontal: 24, borderBottomWidth: selectedIndexType === index ? 1 : 0, borderColor: selectedIndexType === index ? 'green' : 'black' }}>
-                            <Text style={{ color: selectedIndexType === index ? 'green' : 'black' }}>{item.toUpperCase()}</Text>
+                        <TouchableOpacity key={index} onPress={() => _selectedType(index)} style={{ paddingVertical: 16, paddingHorizontal: 24, borderBottomWidth: selectedIndexType === index ? 1 : 0, borderColor: selectedIndexType === index ? 'rgba(255,145,173,1)' : 'black' }}>
+                            <Text style={{ color: selectedIndexType === index ? 'rgba(255,145,173,1)' : 'black' }}>{item.toUpperCase()}</Text>
                         </TouchableOpacity>
                     )
                 })}

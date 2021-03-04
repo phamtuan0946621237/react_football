@@ -59,7 +59,7 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#DEDEDE'
+    backgroundColor: 'rgba(255,145,173,0.5)'
   },
   careerItemContainer: {
     flexDirection: 'row',
@@ -67,7 +67,7 @@ const style = StyleSheet.create({
     // backgroundColor : 'white',
     paddingVertical: 16,
     borderTopWidth: 1,
-    borderColor: '#DEDEDE'
+    borderColor: 'rgba(255,145,173,0.5)'
 
   },
   infoText: {

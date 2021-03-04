@@ -91,16 +91,17 @@ const LeagueDetailPage = (props: any) => {
     }
 
     function onClickDetailNew(url : string) {
-        console.log("url.slice(0,4)",url.slice(0,4))
         if (url.slice(0,4) === "http") {
             Linking.openURL(url);
         }else {
             Linking.openURL("https://www.fotmob.com" + url);
         }
     }
+
     function _onClickPlayer(id : number) {
         navigation.navigate(LeagueNavigator.playerRoute,{idPlayer : id})
     }
+    
     function _onClickTeam(id : number) {
         // navigation.navigate(LeagueNavigator.clubRoute,{})
     }

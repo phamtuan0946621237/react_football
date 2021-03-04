@@ -4,7 +4,7 @@ import MatchPage from '../module/container/MatchPage'
 import MatchDetailPage from '../module/container/MatchDetailPage'
 import ClubPage from '../module/container/ClubPage'
 import PlayerPage from '../module/container/Player'
-import {Platform} from 'react-native'
+import {Platform, View} from 'react-native'
 const Stack = createStackNavigator();
 
 
@@ -18,6 +18,8 @@ function MacthStack() {
     <Stack.Navigator 
     screenOptions={ScreenOptions}
     initialRouteName={matchRoute}
+    headerMode = "screen"
+    
     >
       <Stack.Screen  key={matchRoute} name={matchRoute} component={MatchPage} options={{title : "Match"}}/>
       <Stack.Screen key={matchDetailRoute} name={matchDetailRoute} component={MatchDetailPage} options={{title : "Match Detail"}}/>
@@ -30,7 +32,7 @@ function MacthStack() {
 export default MacthStack
 
 export const ScreenOptions: StackNavigationOptions = {
-    headerTintColor: "black",
+    headerTintColor: "white",
     headerBackTitleVisible: false,
     headerTitleAlign: 'center',
     headerTitleStyle: {
@@ -42,9 +44,8 @@ export const ScreenOptions: StackNavigationOptions = {
     headerRightContainerStyle: {
       paddingHorizontal: 16,
     },
-    
     headerStyle: {
-      backgroundColor: 'white',
+      backgroundColor: 'rgba(255,145,173,0.7)',
       shadowColor: 'transparent',
       elevation: 0,
     },

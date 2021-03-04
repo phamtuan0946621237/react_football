@@ -7,7 +7,8 @@ import Modal from 'react-native-modal';
 import { connect, useDispatch } from 'react-redux';
 import { matchAction } from '../../../redux/action/match';
 import ListMatchComponent from './component/ListMatchComponent';
-import {Navigator} from '../../../navigation'
+import { Navigator } from '../../../navigation'
+
 const MatchPage = (props: any) => {
     //variable
     const { macthResponse } = props
@@ -15,7 +16,7 @@ const MatchPage = (props: any) => {
     const dispatch = useDispatch()
     const navigation = useNavigation();
     const [date, setDate] = useState(new Date());
-    const [selectedDate,setSelectedDate] = useState<string>(dayjs(new Date()).format('DD/MM/YYYY'))
+    const [selectedDate, setSelectedDate] = useState<string>(dayjs(new Date()).format('DD/MM/YYYY'))
 
     // life cycle
     useEffect(() => {
@@ -31,12 +32,12 @@ const MatchPage = (props: any) => {
     function showDatepicker() {
         setShow(true)
     }
-    function onChange (event: any, selectedDate: any) {
+    function onChange(event: any, selectedDate: any) {
         const currentDate = selectedDate || date;
         setDate(currentDate);
     };
-    function _selectedDate(date : Date) {
-        
+    function _selectedDate(date: Date) {
+
         let day = dayjs(date).format('DD')
         let month = dayjs(date).format('MM')
         let year = dayjs(date).format('YYYY')
@@ -44,13 +45,13 @@ const MatchPage = (props: any) => {
         dispatch(matchAction({ date: `${year}${month}${day}`, sortOnClient: true }))
         setShow(false)
     }
-    function onClickChooseMatch(id : number) {
-        navigation.navigate(Navigator.matchDetailRoute,{matchId : id})
+    function onClickChooseMatch(id: number) {
+        navigation.navigate(Navigator.matchDetailRoute, { matchId: id })
     }
 
     //layout
     return (
-        <View >
+        <View style={{backgroundColor : 'rgba(255,145,173,0.2)'}}>
             <TouchableOpacity style={{
                 backgroundColor: 'white',
                 borderColor: '#E6E7E8',
@@ -61,7 +62,7 @@ const MatchPage = (props: any) => {
             }}
                 onPress={showDatepicker}
             >
-                <Text>{selectedDate}</Text> 
+                <Text>{selectedDate}</Text>
             </TouchableOpacity>
 
             <FlatList
@@ -71,7 +72,7 @@ const MatchPage = (props: any) => {
                     <ListMatchComponent
                         items={macthResponse.leagues !== undefined ? macthResponse.leagues[index].matches : []}
                         nameLeague={macthResponse.leagues[index].name}
-                        onClick = {onClickChooseMatch}
+                        onClick={onClickChooseMatch}
                     />
                 )}
                 keyExtractor={(_, index) => index.toString()}
@@ -84,19 +85,19 @@ const MatchPage = (props: any) => {
                 animationOut="fadeOutDown"
                 animationOutTiming={500}
                 backdropTransitionOutTiming={0}>
-                    <View style={{backgroundColor : 'white'}}>
-                        <View style={{flexDirection : 'row',justifyContent : 'space-between',padding : 16}}>
-                            <Text onPress={() => setShow(false)} style={{color : 'red'}}>Huỷ</Text>
-                            <Text onPress={() => _selectedDate(date)} style={{color : 'green'}}>Chọn</Text>
-                        </View>
-                <DateTimePicker
-                    testID="dateTimePicker"
-                    value={date}
-                    mode={'date'}
-                    is24Hour={true}
-                    display="default"
-                    onChange={onChange}
-                />
+                <View style={{ backgroundColor: 'white' }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 16 }}>
+                        <Text onPress={() => setShow(false)} style={{ color: 'red' }}>Huỷ</Text>
+                        <Text onPress={() => _selectedDate(date)} style={{ color: 'green' }}>Chọn</Text>
+                    </View>
+                    <DateTimePicker
+                        testID="dateTimePicker"
+                        value={date}
+                        mode={'date'}
+                        is24Hour={true}
+                        display="default"
+                        onChange={onChange}
+                    />
                 </View>
             </Modal>
         </View>

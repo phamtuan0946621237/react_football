@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image ,Platform,StyleSheet,Dimensions} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MacthStack from './navigation'
@@ -7,43 +7,61 @@ import LeagueStack from './leaguenavigation'
 import SearchStack from './searchNavigation'
 import NewsStack from './newsNavigation'
 import AboutUsStack from './aboutUsNavigation'
+
+
 const TabbarNavigation = () => {
 
     const BottomTab = createBottomTabNavigator();
     return (
         <NavigationContainer>
-            <BottomTab.Navigator>
+            <BottomTab.Navigator
+                tabBarOptions={{
+                    showLabel: false,
+                    activeTintColor: "#000000",
+                    inactiveTintColor: "#000000",
+                    style: {
+                        backgroundColor: 'rgba(255,145,173,0.7)',
+                        },
+                }}
+            >
                 <BottomTab.Screen name="MacthStack" component={MacthStack} options={{
                     tabBarLabel: "Match",
-                    // tabBarIcon: () => {
-                    //     return <Image source={{ uri: "https://previews.123rf.com/images/savanno/savanno1803/savanno180300064/96881181-home-icon-white-silhouette-on-blue-round-background.jpg" }} style={{ width: 24, height: 24, marginRight: 4 }} />
-                    // }
+                    tabBarIcon: () => {
+                        return <Image source={require('../assest/inHome.png')} style={{ width: 24, height: 24 }} />
+                    }
                 }} />
                 <BottomTab.Screen name="LeagueStack" component={LeagueStack} options={{
                     title: "League",
-                    // tabBarIcon: () => {
-                    //     return <Image source={{ uri: "https://www.vippng.com/png/detail/245-2453567_email-university-interscholastic-league-electronic-twitter-circle-logo.png" }} style={{ width: 24, height: 24, marginRight: 4, marginTop: 2 }} />
-                    // }
+                    tabBarIcon: () => {
+                        return <Image source={require('../assest/inLeague.png')} style={{ width: 24, height: 24 }} />
+                    }
                 }}
                 />
-                <BottomTab.Screen name="SearchStack" component={SearchStack} options={{
-                    title: "Search",
-                    // tabBarIcon: () => {
-                    //     return <Image source={{ uri: "https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-4/177800/154-512.png" }} style={{ width: 21, height: 21, marginRight: 4, marginTop: 0 }} />
-                    // }
-                }} />
+                <BottomTab.Screen name="SearchStack" component={SearchStack}
+
+                    options={{
+                        // title: "Search",
+                        // showLabel: false,
+                        tabBarIcon: () => {
+                            return (
+                                <View style={{ position: 'absolute', top: -40, width: 80, height: 80, backgroundColor: 'white', borderRadius: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'center',borderWidth : 10,borderColor : 'rgba(255,145,173,0.7)' }}>
+                                    <Image source={require('../assest/inSearch.png')} style={{ width: 28, height: 28 }} />
+                                </View>
+                            )
+                        }
+                    }} />
                 <BottomTab.Screen name="NewsStack" component={NewsStack} options={{
                     title: "News",
-                    // tabBarIcon: () => {
-                    //     return <Image source={{ uri: "https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-and-lines-1/2/45-512.png" }} style={{ width: 21, height: 21, marginRight: 4, marginTop: 0 }} />
-                    // }
+                    tabBarIcon: () => {
+                        return <Image source={require('../assest/inNews.png')} style={{ width: 24, height: 24 }} />
+                    }
                 }} />
-                <BottomTab.Screen name="AboutUsStack" component={AboutUsStack} options={{ 
+                <BottomTab.Screen name="AboutUsStack" component={AboutUsStack} options={{
                     title: "AboutUs",
-                // tabBarIcon: () => {
-                //     return <Image source={{ uri: "https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/user-male-circle-blue-512.png" }} style={{ width: 21, height: 21, marginRight: 4, marginTop: 0 }} />
-                // }
-            }} />
+                    tabBarIcon: () => {
+                        return <Image source={require('../assest/inAccount.png')} style={{ width: 24, height: 24 }} />
+                    }
+                }} />
             </BottomTab.Navigator>
         </NavigationContainer>
     )

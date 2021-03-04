@@ -35,7 +35,9 @@ const AboutUsPage = (props: any) => {
     //layout
     return (
         <ScrollView >
-            <Image style={{ width: Dimensions.get("window").width, height: 200 }} source={{ uri: 'https://www.kyrosports.com/wp-content/uploads/2020/06/EPL-LOGO.jpg' }} />
+            <View style={{paddingHorizontal  :16,backgroundColor : 'rgba(255,145,173,1)'}}>
+            <Image style={{ backgroundColor : 'rgba(255,145,173,1)',width: Dimensions.get("window").width - 32, height: 200,resizeMode : 'contain' }} source={{ uri: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Premier_League_Logo.svg/1200px-Premier_League_Logo.svg.png' }} />
+            </View>
             <ScrollView>
                 <View style={style.container}>
                     <Text style={style.title}>THE PULSE OF FOOTBALL </Text>
@@ -66,9 +68,9 @@ const AboutUsPage = (props: any) => {
 
                     {/*send mail*/}
 
-                    <TextInput placeholder = "Name" style={{height : 50,borderWidth : 1,paddingHorizontal : 16,borderColor : '#DEDEDE',borderRadius : 12,marginTop : 16}}/>
-                    <TextInput placeholder = "Email" style={{height : 50,borderWidth : 1,paddingHorizontal : 16,borderColor : '#DEDEDE',borderRadius : 12,marginTop : 16}}/>
-                    <TextInput placeholder = "Message" style={{height : 50,borderWidth : 1,paddingHorizontal : 16,borderColor : '#DEDEDE',borderRadius : 12,marginTop : 16}}/>
+                    <TextInput placeholder = "Name" style={{height : 50,borderWidth : 1,paddingHorizontal : 16,borderColor : 'rgba(255,145,173,0.5)',borderRadius : 12,marginTop : 16}}/>
+                    <TextInput placeholder = "Email" style={{height : 50,borderWidth : 1,paddingHorizontal : 16,borderColor : 'rgba(255,145,173,0.5)',borderRadius : 12,marginTop : 16}}/>
+                    <TextInput placeholder = "Message" style={{height : 50,borderWidth : 1,paddingHorizontal : 16,borderColor : 'rgba(255,145,173,0.5)',borderRadius : 12,marginTop : 16}}/>
                     <TouchableOpacity style={{flexDirection : 'row',borderRadius : 6,backgroundColor : '#00985f',paddingVertical : 16,justifyContent : 'center',marginVertical : 16}}>
                         <Text style={{color : 'white',fontWeight : 'bold'}}>Send</Text>
                     </TouchableOpacity>

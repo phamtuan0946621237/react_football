@@ -20,7 +20,7 @@ export default StyleSheet.create({
     },
     info : {
         marginTop : 16,
-        borderColor : "#DEDEDE",
+        borderColor : "'rgba(255,145,173,0.5)'",
         borderWidth : 1,
         borderRadius : 12,
         padding : 16,

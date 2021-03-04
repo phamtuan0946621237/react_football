@@ -45,7 +45,6 @@ const ListMatchComponent = (props: ListMatchComponent) => {
         <View style={styles.infoTeam}>
         <Image style={{ width: 16, height: 16 }} source={{ uri: "https://www.fotmob.com/images/team/" + iconAway }} />
         <Text style={styles.infoAwayClub}>{awayNameClub}</Text>
-          
         </View>
       </TouchableOpacity>
     )
@@ -58,7 +57,7 @@ const ListMatchComponent = (props: ListMatchComponent) => {
   return (
     <View>
       <View style={styles.section}>
-      <Text>{props.nameLeague}</Text>
+      <Text style={{color : 'black'}}>{props.nameLeague}</Text>
       </View>
       {props.items.map((item : ListMatchesItem,index : number) => {
         return (
@@ -86,9 +85,9 @@ const styles = StyleSheet.create({
   itemMatch : {
     flexDirection : 'row',
     padding : 16,
-    borderBottomWidth : 1,
+    // borderBottomWidth : 1,
     borderTopWidth : 1,
-    borderColor : '#F9F9FA',
+    borderColor : 'rgba(255,145,173,0.3)',
     backgroundColor : 'white'
   },
   resultMatch : {
@@ -106,6 +105,7 @@ const styles = StyleSheet.create({
     textAlign : 'left'
   },
   section : {
-    padding : 8
+    padding : 8,
+    // backgroundColor : 'rgba(255,145,173,0.1)'
   }
 });

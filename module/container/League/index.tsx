@@ -20,15 +20,16 @@ const LeaguePage = (props: any) => {
     let arrDown = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3-ywUVHBNam3DS8gXfLDGYf7lpS98npeAhw&usqp=CAU"
     const [isShow,setIsShow] = useState<boolean>(false)
     const [selectedIndex,setSelectedIndex] = useState<number>()
-
+    const [section,setSection] = useState<number>()
     // life cycle
     useEffect(() => {
         dispatch(leagueAction({}))
     }, [])
 
     // action
-    function _onClickArr(index : number) {
+    function _onClickArr(index : number,i : number) {
         setSelectedIndex(index)
+        setSection(i)
         setIsShow(!isShow)
     }
     function onClick(url : string) {
@@ -55,13 +56,13 @@ const LeaguePage = (props: any) => {
                                                 <Image style={{ width: 24, height: 24, marginRight: 16 }} source={{ uri: item.leagues ? `https://images.fotmob.com/image_resources/logo/teamlogo/${item.ccode.toLowerCase()}.png` :`https://www.fotmob.com/images/league/${item.id}` }} />
                                                 <Text style={{ flex: 1 }}>{item.name}</Text>
                                                 {item.leagues &&
-                                                    <TouchableOpacity style={style.iconArrContainer} onPress = {() => _onClickArr(index)}>
+                                                    <TouchableOpacity style={style.iconArrContainer} onPress = {() => _onClickArr(index,i)}>
                                                         <Image style={{ width: 16, height: 16 }} source={{ uri: isShow === true && selectedIndex === index ? arrUp : arrDown }} />
                                                     </TouchableOpacity>
                                                 }
                                             </TouchableOpacity>
                                             {
-                                            selectedIndex === index && isShow === true && 
+                                            section === i && selectedIndex === index && isShow === true && 
                                             item.leagues && item.leagues.map((itemLeague: any, indexLeague: number) => {
                                                 return (
                                                     <Text onPress = {() => onClick(itemLeague.pageUrl)} key={indexLeague} style={{ paddingVertical: 8 }}>{itemLeague.name}</Text>

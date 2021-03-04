@@ -24,25 +24,21 @@ function AboutUsStack() {
 export default AboutUsStack
 
 export const ScreenOptions: StackNavigationOptions = {
-    // headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
-    headerTintColor: "black",
-    headerBackTitleVisible: false,
-    headerTitleAlign: 'center',
-    headerTitleStyle: {
-      paddingHorizontal: 16
-    },
-    // headerBackground : 'white',
-    headerLeftContainerStyle: {
-      paddingHorizontal: Platform.OS == 'ios' ? 16 : 0,
-    },
-    headerRightContainerStyle: {
-      paddingHorizontal: 16,
-    },
-    
-    headerStyle: {
-      backgroundColor: 'white',
-      shadowColor: 'transparent',
-      elevation: 0,
-    },
-  };
-  
+  headerTintColor: "white",
+  headerBackTitleVisible: false,
+  headerTitleAlign: 'center',
+  headerTitleStyle: {
+    paddingHorizontal: 16
+  },
+  headerLeftContainerStyle: {
+    paddingHorizontal: Platform.OS == 'ios' ? 16 : 0,
+  },
+  headerRightContainerStyle: {
+    paddingHorizontal: 16,
+  },
+  headerStyle: {
+    backgroundColor: 'rgba(255,145,173,0.7)',
+    shadowColor: 'transparent',
+    elevation: 0,
+  },
+};

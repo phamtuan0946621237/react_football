@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     padding : 16,
     borderBottomWidth : 1,
     borderTopWidth : 1,
-    borderColor : '#F9F9FA',
+    borderColor : 'rgba(255,145,173,0.3)',
     backgroundColor : 'white'
   },
   resultMatch : {

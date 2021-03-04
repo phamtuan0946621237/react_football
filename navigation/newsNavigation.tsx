@@ -24,23 +24,22 @@ function NewsStack() {
 export default NewsStack
 
 export const ScreenOptions: StackNavigationOptions = {
-    headerTintColor: "black",
-    headerBackTitleVisible: false,
-    headerTitleAlign: 'center',
-    headerTitleStyle: {
-      paddingHorizontal: 16
-    },
-    headerLeftContainerStyle: {
-      paddingHorizontal: Platform.OS == 'ios' ? 16 : 0,
-    },
-    headerRightContainerStyle: {
-      paddingHorizontal: 16,
-    },
-    
-    headerStyle: {
-      backgroundColor: 'white',
-      shadowColor: 'transparent',
-      elevation: 0,
-    },
-  };
+  headerTintColor: "white",
+  headerBackTitleVisible: false,
+  headerTitleAlign: 'center',
+  headerTitleStyle: {
+    paddingHorizontal: 16
+  },
+  headerLeftContainerStyle: {
+    paddingHorizontal: Platform.OS == 'ios' ? 16 : 0,
+  },
+  headerRightContainerStyle: {
+    paddingHorizontal: 16,
+  },
+  headerStyle: {
+    backgroundColor: 'rgba(255,145,173,0.7)',
+    shadowColor: 'transparent',
+    elevation: 0,
+  },
+};
   

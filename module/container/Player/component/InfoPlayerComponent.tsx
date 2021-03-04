@@ -112,7 +112,7 @@ const style = StyleSheet.create({
     paddingVertical: 16,
     backgroundColor: 'white',
     borderBottomWidth: 1,
-    borderColor: '#DEDEDE'
+    borderColor: 'rgba(255,145,173,0.5)'
   },
   itemPlayerProps: {
     flex: 1,
@@ -123,19 +123,19 @@ const style = StyleSheet.create({
   playerPropsContainer: {
     margin: 16,
     borderWidth: 1,
-    borderColor: '#DEDEDE',
+    borderColor: 'rgba(255,145,173,0.5)',
   },
   playerPositionContainer: {
     paddingVertical: 16,
     marginHorizontal: 16,
     borderBottomWidth: 1,
-    borderColor: '#DEDEDE'
+    borderColor: 'rgba(255,145,173,0.5)'
   },
   infoLeague: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#DEDEDE'
+    backgroundColor: 'rgba(255,145,173,0.5)'
   },
   leagueContainer: {
     margin: 16
