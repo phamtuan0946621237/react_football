@@ -4,7 +4,7 @@ import { Image, Linking, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { connect, useDispatch } from 'react-redux';
 import { playerAction } from '../../../redux/action/player';
-import { ListNewsItem } from '../../component';
+import { ListNewsItem, ListTypeHorizontalComponent } from '../../component';
 import { NewsType } from '../../type';
 import CareerComponent from './component/CareerComponent';
 import InfoPlayerComponent from './component/InfoPlayerComponent';
@@ -79,15 +79,10 @@ const PlayerPage = (props: any) => {
                     </View>
                 </View>
             </View>
-            <ScrollView horizontal={true} style={style.scrollContainer} showsHorizontalScrollIndicator={false}>
-                {typePlayer.map((item: string, index: number) => {
-                    return (
-                        <TouchableOpacity key={index} onPress={() => _chooseType(index)} style={[style.scrollItem, { borderBottomWidth: index === selectedTypeIndex ? 2 : 0 }]}>
-                            <Text style={{ fontWeight: '600', color: index === selectedTypeIndex ? "green" : "gray" }}>{item.toUpperCase()}</Text>
-                        </TouchableOpacity>
-                    )
-                })}
-            </ScrollView>
+            <ListTypeHorizontalComponent
+                data={typePlayer}
+                onClick={_chooseType}
+            />
             {_buildMainView()}
         </ScrollView>
     )

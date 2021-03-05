@@ -207,7 +207,7 @@ const StatsComponent = (props: StatsComponentType) => {
       <ScrollView horizontal={true} style={{ backgroundColor: 'white', borderTopWidth: 1, borderColor: '#E5E5E5', borderBottomWidth: 1, }}>
         {props.dataStats && props.dataStats.tabs.map((item: string, index: number) => {
           return (
-            <Text key={index} onPress={() => _onClickChooseType(index)} style={{ margin: 16, color: selectedIndex === index ? 'green' : 'black', fontWeight: 'bold' }}>{item}</Text>
+            <Text key={index} onPress={() => _onClickChooseType(index)} style={{ margin: 16, color: selectedIndex === index ? 'rgba(124,141,163,1)' : 'black', fontWeight: 'bold' }}>{item}</Text>
           )
         })}
       </ScrollView>

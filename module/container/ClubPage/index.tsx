@@ -4,7 +4,7 @@ import { Image, Linking, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { connect, useDispatch } from 'react-redux';
 import { clubAction, fixturesAction, squadAction, transferAction } from '../../../redux/action/club';
-import { ListNewsItem } from '../../component';
+import { ListNewsItem, ListTypeHorizontalComponent } from '../../component';
 import { NewsType, RouteClubType } from '../../type';
 import FixturesClubComponent from './component/FixturesClubComponent';
 import SquadClubComponent from './component/SquadClubComponent';
@@ -170,16 +170,10 @@ const ClubScreen = (props : any) => {
             </View>
 
             {/* feature */}
-            <ScrollView horizontal={true} style={style.scrollContainer} showsHorizontalScrollIndicator={false}>
-                {type.map((item: string, index: number) => {
-                    return (
-                        <TouchableOpacity key={index} onPress={() => _chooseType(index)} style={[style.scrollItem, { borderBottomWidth: index === selectedTypeIndex ? 2 : 0 }]}>
-                            <Text style={{ fontWeight: '600', color: index === selectedTypeIndex ? "green" : "gray" }}>{item.toUpperCase()}</Text>
-                        </TouchableOpacity>
-                    )
-                })}
-
-            </ScrollView>
+            <ListTypeHorizontalComponent
+                data={type}
+                onClick={_chooseType}
+            />
             {/* main View */}
             {_buildMainView(type[selectedTypeIndex])}
 

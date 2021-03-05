@@ -4,7 +4,7 @@ import { Image, Linking, ScrollView, Text, TouchableOpacity, View } from 'react-
 import { connect, useDispatch } from 'react-redux';
 import { LeagueNavigator } from '../../../navigation';
 import { leagueDetailAction, matchesLeagueAction, statsLeagueAction, transferAction } from '../../../redux/action/league';
-import { ListNewsItem } from '../../component';
+import { ListNewsItem, ListTypeHorizontalComponent } from '../../component';
 import { NewsType, RouteClubType } from '../../type';
 import { RouteLeague } from '../League';
 import MatchesComponent from './component/MatchesComponent';
@@ -78,9 +78,6 @@ const LeagueDetailPage = (props: any) => {
     }, [leagueDetailResponse])
 
     // action 
-    function _chooseType(index: number) {
-        setSelectedTypeIndex(index)
-    }
 
     function _onClickClub(id: string, name: string) {
         navigation.navigate(LeagueNavigator.clubRoute,{idTeam: id,nameClub: name} as RouteClubType)
@@ -88,6 +85,10 @@ const LeagueDetailPage = (props: any) => {
 
     function _onClickMatches(id ?: string) {
         navigation.navigate(LeagueNavigator.matchDetailRoute,{matchId : id})
+    }
+
+    function _onClickType(index : number) {
+        setSelectedTypeIndex(index)
     }
 
     function onClickDetailNew(url : string) {
@@ -110,9 +111,7 @@ const LeagueDetailPage = (props: any) => {
     function _buildMainView(type: string) {
         switch (type) {
             case "News":
-                return (
-                    <View>
-                        {leagueDetailResponse && leagueDetailResponse.news.map((item: NewsType, index: number) => {
+                return <View>{leagueDetailResponse && leagueDetailResponse.news.map((item: NewsType, index: number) => {
                             return (
                                 <ListNewsItem
                                     key={index}
@@ -122,11 +121,7 @@ const LeagueDetailPage = (props: any) => {
                                     source={item.sourceStr}
                                     iconSource={item.sourceIconUrl}
                                 />
-                            )
-                        })}
-
-                    </View>
-                )
+                            )})}</View>
             case "Table":
                 return (
                     <View>
@@ -166,6 +161,7 @@ const LeagueDetailPage = (props: any) => {
 
         }
     }
+    
 
     // main Layout
     return (
@@ -178,16 +174,10 @@ const LeagueDetailPage = (props: any) => {
                 </View>
             </View>
 
-            <ScrollView horizontal={true} style={style.scrollContainer} showsHorizontalScrollIndicator={false}>
-                {type.map((item: string, index: number) => {
-                    return (
-                        <TouchableOpacity key={index} onPress={() => _chooseType(index)} style={[style.scrollItem, { borderBottomWidth: index === selectedTypeIndex ? 2 : 0 }]}>
-                            <Text style={{ fontWeight: '600', color: index === selectedTypeIndex ? "green" : "gray" }}>{item.toUpperCase()}</Text>
-                        </TouchableOpacity>
-                    )
-                })}
-            </ScrollView>
-
+            <ListTypeHorizontalComponent
+                data={type}
+                onClick={_onClickType}
+            />
 
             {_buildMainView(type[selectedTypeIndex])}
 
