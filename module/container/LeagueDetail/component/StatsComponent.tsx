@@ -103,7 +103,7 @@ const StatsComponent = (props: StatsComponentType) => {
       <View>
         {props.dataStats && props.dataStats.players.map((items: StatsItemType, index: number) => {
           return (
-            <View key={index} style={{ paddingBottom: 16, borderBottomWidth: 1, borderColor: "'rgba(255,145,173,0.5)'", paddingHorizontal: 16 }}>
+            <View key={index} style={{ paddingBottom: 16, borderBottomWidth: 1, borderColor: "'rgba(124,141,163,0.5)'", paddingHorizontal: 16 }}>
               <Text style={{ marginVertical: 16, fontWeight: 'bold' }}>{items.header}</Text>
               <View style={{ borderRadius: 16, borderColor: "#F5F5F5", borderWidth: 1 }}>
                 {items.topThree && items.topThree.map((item: TopThreePlayerType, index: number) => {
@@ -133,8 +133,8 @@ const StatsComponent = (props: StatsComponentType) => {
 
   function _buildTrophiesView(nameUp: string, valueUp: string, idUp: number, nameDown: string, valueDown: string, idDown: number) {
     return (
-      <View style={{ borderColor: 'rgba(255,145,173,0.5)', borderWidth: 1, borderRadius: 12 }}>
-        <View style={{ flexDirection: 'row', padding: 16, alignItems: 'center', borderBottomWidth: 1, borderColor: 'rgba(255,145,173,0.5)' }}>
+      <View style={{ borderColor: 'rgba(124,141,163,0.5)', borderWidth: 1, borderRadius: 12 }}>
+        <View style={{ flexDirection: 'row', padding: 16, alignItems: 'center', borderBottomWidth: 1, borderColor: 'rgba(124,141,163,0.5)' }}>
           <Image source={{ uri: `https://www.fotmob.com/images/team/${idUp}` }} style={{ width: 36, height: 36 }} />
           <View style={{ flex: 1, marginLeft: 16 }}>
             <Text style={{ fontSize: 16, marginBottom: 8 }}>{nameUp}</Text>
@@ -157,7 +157,7 @@ const StatsComponent = (props: StatsComponentType) => {
       <View style={{ backgroundColor: 'white' }}>
         {props.dataStats && props.dataStats.teams.map((items: StatsItemType, index: number) => {
           return (
-            <View key ={index} style={{ paddingHorizontal: 16, borderBottomWidth: 1, borderColor: 'rgba(255,145,173,0.5)' }}>
+            <View key ={index} style={{ paddingHorizontal: 16, borderBottomWidth: 1, borderColor: 'rgba(124,141,163,0.5)' }}>
               <Text style={{ margin: 16, fontWeight: 'bold' }}>{items.header}</Text>
               <View style={{ borderRadius: 16, borderColor: "#F5F5F5", borderWidth: 1, marginBottom: 16 }}>
                 {items.topThree.map((item: TopThreePlayerType, i: number) => {

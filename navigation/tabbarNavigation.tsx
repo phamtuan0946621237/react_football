@@ -20,20 +20,28 @@ const TabbarNavigation = () => {
                     activeTintColor: "#000000",
                     inactiveTintColor: "#000000",
                     style: {
-                        backgroundColor: 'rgba(255,145,173,0.7)',
+                        backgroundColor: '#7C8DA3',
                         },
                 }}
             >
                 <BottomTab.Screen name="MacthStack" component={MacthStack} options={{
                     tabBarLabel: "Match",
-                    tabBarIcon: () => {
-                        return <Image source={require('../assest/inHome.png')} style={{ width: 24, height: 24 }} />
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            focused ? 
+                        <Image source={require('../assest/outHome.png')} style={{ width: 24, height: 24 }} /> : 
+                        <Image source={require('../assest/inHome.png')} style={{ width: 24, height: 24 }} />
+                        )
                     }
                 }} />
                 <BottomTab.Screen name="LeagueStack" component={LeagueStack} options={{
                     title: "League",
-                    tabBarIcon: () => {
-                        return <Image source={require('../assest/inLeague.png')} style={{ width: 24, height: 24 }} />
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            focused ? 
+                        <Image source={require('../assest/outLeague.png')} style={{ width: 24, height: 24 }} /> : 
+                        <Image source={require('../assest/inLeague.png')} style={{ width: 24, height: 24 }} />
+                        )
                     }
                 }}
                 />
@@ -44,7 +52,7 @@ const TabbarNavigation = () => {
                         // showLabel: false,
                         tabBarIcon: () => {
                             return (
-                                <View style={{ position: 'absolute', top: -40, width: 80, height: 80, backgroundColor: 'white', borderRadius: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'center',borderWidth : 10,borderColor : 'rgba(255,145,173,0.7)' }}>
+                                <View style={{ position: 'absolute', top: -40, width: 80, height: 80, backgroundColor: 'white', borderRadius: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'center',borderWidth : 10,borderColor : '#7C8DA3' }}>
                                     <Image source={require('../assest/inSearch.png')} style={{ width: 28, height: 28 }} />
                                 </View>
                             )
@@ -52,14 +60,22 @@ const TabbarNavigation = () => {
                     }} />
                 <BottomTab.Screen name="NewsStack" component={NewsStack} options={{
                     title: "News",
-                    tabBarIcon: () => {
-                        return <Image source={require('../assest/inNews.png')} style={{ width: 24, height: 24 }} />
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            focused ? 
+                        <Image source={require('../assest/outNews.png')} style={{ width: 24, height: 24 }} /> : 
+                        <Image source={require('../assest/inNews.png')} style={{ width: 24, height: 24 }} />
+                        )
                     }
                 }} />
                 <BottomTab.Screen name="AboutUsStack" component={AboutUsStack} options={{
                     title: "AboutUs",
-                    tabBarIcon: () => {
-                        return <Image source={require('../assest/inAccount.png')} style={{ width: 24, height: 24 }} />
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            focused ? 
+                        <Image source={require('../assest/outAccount.png')} style={{ width: 24, height: 24 }} />
+                        : <Image source={require('../assest/inAccount.png')} style={{ width: 24, height: 24 }} />
+                        )
                     }
                 }} />
             </BottomTab.Navigator>

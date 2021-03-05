@@ -109,7 +109,7 @@ const SearchPage = (props: any) => {
         <ScrollView>
             <View style={{ flexDirection: 'row', margin: 16 }}>
                 <TextInput
-                    style={{ flex: 1, height: 50, borderWidth: 1, borderRadius: 12, paddingHorizontal: 16, borderColor: 'rgba(255,145,173,0.5)', backgroundColor: 'white', marginRight: 16 }}
+                    style={{ flex: 1, height: 50, borderWidth: 1, borderRadius: 12, paddingHorizontal: 16, borderColor: 'rgba(124,141,163,0.5)', backgroundColor: 'white', marginRight: 16 }}
                     onChange={_onChange}
                     placeholder="Nhập vào bạn ơi"
                 />

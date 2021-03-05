@@ -103,8 +103,8 @@ const MatchDetailPage = (props: any) => {
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{ backgroundColor: 'white', minHeight: 50 }}>
                 {macthDetailResponse !== undefined && macthDetailResponse.nav.map((item: string, index: number) => {
                     return (
-                        <TouchableOpacity key={index} onPress={() => _selectedType(index)} style={{ paddingVertical: 16, paddingHorizontal: 24, borderBottomWidth: selectedIndexType === index ? 1 : 0, borderColor: selectedIndexType === index ? 'rgba(255,145,173,1)' : 'black' }}>
-                            <Text style={{ color: selectedIndexType === index ? 'rgba(255,145,173,1)' : 'black' }}>{item.toUpperCase()}</Text>
+                        <TouchableOpacity key={index} onPress={() => _selectedType(index)} style={{ paddingVertical: 16, paddingHorizontal: 24, borderBottomWidth: selectedIndexType === index ? 1 : 0, borderColor: selectedIndexType === index ? 'rgba(124,141,163,1)' : 'black' }}>
+                            <Text style={{ color: selectedIndexType === index ? 'rgba(124,141,163,1)' : 'black' }}>{item.toUpperCase()}</Text>
                         </TouchableOpacity>
                     )
                 })}

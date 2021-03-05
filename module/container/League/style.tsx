@@ -11,7 +11,8 @@ export default StyleSheet.create({
         borderRadius : 16
     },
     container : {
-        paddingHorizontal : 16
+        paddingHorizontal : 16,
+        backgroundColor : 'rgba(124,141,163,0.2)'
     },
     title : {
         marginTop : 16,

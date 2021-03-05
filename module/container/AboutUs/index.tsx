@@ -35,8 +35,8 @@ const AboutUsPage = (props: any) => {
     //layout
     return (
         <ScrollView >
-            <View style={{paddingHorizontal  :16,backgroundColor : 'rgba(255,145,173,1)'}}>
-            <Image style={{ backgroundColor : 'rgba(255,145,173,1)',width: Dimensions.get("window").width - 32, height: 200,resizeMode : 'contain' }} source={{ uri: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Premier_League_Logo.svg/1200px-Premier_League_Logo.svg.png' }} />
+            <View style={{paddingHorizontal  :16,backgroundColor : 'rgba(124,141,163,1)'}}>
+            <Image style={{ backgroundColor : 'rgba(124,141,163,1)',width: Dimensions.get("window").width - 32, height: 200,resizeMode : 'contain' }} source={{ uri: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Premier_League_Logo.svg/1200px-Premier_League_Logo.svg.png' }} />
             </View>
             <ScrollView>
                 <View style={style.container}>
@@ -68,9 +68,9 @@ const AboutUsPage = (props: any) => {
 
                     {/*send mail*/}
 
-                    <TextInput placeholder = "Name" style={{height : 50,borderWidth : 1,paddingHorizontal : 16,borderColor : 'rgba(255,145,173,0.5)',borderRadius : 12,marginTop : 16}}/>
-                    <TextInput placeholder = "Email" style={{height : 50,borderWidth : 1,paddingHorizontal : 16,borderColor : 'rgba(255,145,173,0.5)',borderRadius : 12,marginTop : 16}}/>
-                    <TextInput placeholder = "Message" style={{height : 50,borderWidth : 1,paddingHorizontal : 16,borderColor : 'rgba(255,145,173,0.5)',borderRadius : 12,marginTop : 16}}/>
+                    <TextInput placeholder = "Name" style={{height : 50,borderWidth : 1,paddingHorizontal : 16,borderColor : 'rgba(124,141,163,0.5)',borderRadius : 12,marginTop : 16}}/>
+                    <TextInput placeholder = "Email" style={{height : 50,borderWidth : 1,paddingHorizontal : 16,borderColor : 'rgba(124,141,163,0.5)',borderRadius : 12,marginTop : 16}}/>
+                    <TextInput placeholder = "Message" style={{height : 50,borderWidth : 1,paddingHorizontal : 16,borderColor : 'rgba(124,141,163,0.5)',borderRadius : 12,marginTop : 16}}/>
                     <TouchableOpacity style={{flexDirection : 'row',borderRadius : 6,backgroundColor : '#00985f',paddingVertical : 16,justifyContent : 'center',marginVertical : 16}}>
                         <Text style={{color : 'white',fontWeight : 'bold'}}>Send</Text>
                     </TouchableOpacity>

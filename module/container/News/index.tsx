@@ -40,7 +40,7 @@ const NewsPage = (props: any) => {
 
     //layout
     return (
-        <ScrollView style={{backgroundColor : 'rgba(255,145,173,0.2)'}}>
+        <ScrollView style={{backgroundColor : 'rgba(124,141,163,0.2)'}}>
             {newsResponse && newsResponse.hits && newsResponse.hits.hits.map((item : WorldNewsType,index : number) => {
                 return (
                     <ListNewsItem onClick={() => onClickDetail(item._source.shareUri)} iconSource={"https://images.fotmob.com/image_resources/news/fotmob.png"} icon={item._source.imageUrl} key={index} describle={item._source.title} source={`${item._source.source} - ${item._source.dateUpdated}`} />

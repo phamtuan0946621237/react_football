@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     padding : 16,
     // borderBottomWidth : 1,
     borderTopWidth : 1,
-    borderColor : 'rgba(255,145,173,0.3)',
+    borderColor : 'rgba(124,141,163,0.3)',
     backgroundColor : 'white'
   },
   resultMatch : {
@@ -106,6 +106,6 @@ const styles = StyleSheet.create({
   },
   section : {
     padding : 8,
-    // backgroundColor : 'rgba(255,145,173,0.1)'
+    // backgroundColor : 'rgba(124,141,163,0.1)'
   }
 });

@@ -250,7 +250,7 @@ const style = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
     borderTopWidth: 1,
-    borderColor: 'rgba(255,145,173,0.3)',
+    borderColor: 'rgba(124,141,163,0.3)',
   },
   eventContainer: {
     backgroundColor: 'white',

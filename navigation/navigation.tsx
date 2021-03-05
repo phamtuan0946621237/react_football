@@ -45,9 +45,11 @@ export const ScreenOptions: StackNavigationOptions = {
       paddingHorizontal: 16,
     },
     headerStyle: {
-      backgroundColor: 'rgba(255,145,173,0.7)',
+      backgroundColor: '#7C8DA3',
       shadowColor: 'transparent',
       elevation: 0,
     },
   };
+
+  // rgb(124,141,163)
   

@@ -51,7 +51,7 @@ const MatchPage = (props: any) => {
 
     //layout
     return (
-        <View style={{backgroundColor : 'rgba(255,145,173,0.2)'}}>
+        <View style={{backgroundColor : 'rgba(124,141,163,0.2)'}}>
             <TouchableOpacity style={{
                 backgroundColor: 'white',
                 borderColor: '#E6E7E8',
