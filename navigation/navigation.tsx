@@ -5,6 +5,7 @@ import MatchDetailPage from '../module/container/MatchDetailPage'
 import ClubPage from '../module/container/ClubPage'
 import PlayerPage from '../module/container/Player'
 import {Platform, View} from 'react-native'
+import LeagueDetailPage from '../module/container/LeagueDetail';
 const Stack = createStackNavigator();
 
 
@@ -13,6 +14,7 @@ export const matchDetailRoute = 'MatchDetailRoute';
 export const leagueRoute = 'LeagueRoute';
 export const clubRoute = 'ClubRoute';
 export const playerRoute = 'PlayerRoute';
+export const leagueDetailRoute = 'LeagueDetailRoute';
 function MacthStack() {
   return (
     <Stack.Navigator 
@@ -25,6 +27,7 @@ function MacthStack() {
       <Stack.Screen key={matchDetailRoute} name={matchDetailRoute} component={MatchDetailPage} options={{title : "Match Detail"}}/>
       <Stack.Screen key={clubRoute} name={clubRoute} component={ClubPage} options={{title : "Club"}}/>
       <Stack.Screen key={playerRoute} name={playerRoute} component={PlayerPage} options={{title : "PLayer"}}/>
+      <Stack.Screen  key={leagueDetailRoute} name={leagueDetailRoute} component={LeagueDetailPage} options={{title : "League Detail"}}/>
     </Stack.Navigator>
   );
 }

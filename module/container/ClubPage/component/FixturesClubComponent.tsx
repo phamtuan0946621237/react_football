@@ -34,7 +34,7 @@ const FixturesClubComponent = (props: FixturesClubComponentType) => {
             <Text style={style.title}>{itemmm[0].monthYearKey}</Text>
             {itemmm.map((item: FixturesDataType, i: number) => {
               return (
-                <TouchableOpacity style={style.infoContainer} onPress={() => _onClickMatches(item.id)}>
+                <TouchableOpacity key={i} style={style.infoContainer} onPress={() => _onClickMatches(item.id)}>
                   <Image style={{ width: 40, height: 40 }} source={{ uri: `https://www.fotmob.com/images/team/${item.opponent.id}` }} />
                   <View style={style.right}>
                     <View style={style.info}>

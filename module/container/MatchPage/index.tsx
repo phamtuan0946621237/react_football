@@ -6,18 +6,24 @@ import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import Modal from 'react-native-modal';
 import { connect, useDispatch } from 'react-redux';
 import { matchAction } from '../../../redux/action/match';
-import ListMatchComponent from './component/ListMatchComponent';
-import { Navigator } from '../../../navigation'
+import { leagueAction } from '../../../redux/action/league';
 
+import ListMatchComponent from './component/ListMatchComponent';
+import { Navigator ,SearchNavigator} from '../../../navigation'
+
+export interface RouteLeague {
+    id: string,
+    name: string
+}
 const MatchPage = (props: any) => {
     //variable
-    const { macthResponse } = props
+    const { macthResponse ,leagueResponse} = props
     const [show, setShow] = useState(false);
     const dispatch = useDispatch()
     const navigation = useNavigation();
     const [date, setDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState<string>(dayjs(new Date()).format('DD/MM/YYYY'))
-
+    const [idLeague, setIdLeague] = useState<string>()
     // life cycle
     useEffect(() => {
         let day = dayjs(new Date()).format('DD')
@@ -27,6 +33,30 @@ const MatchPage = (props: any) => {
         dispatch(matchAction({ date: `${year}${month}${day}`, sortOnClient: true }))
         return () => { };
     }, [])
+
+    useEffect(() => {
+        if (!leagueResponse) return
+        if (!idLeague) return
+        if (leagueResponse.countries) {
+            for (var i = 0; i < leagueResponse.countries.length; i++) {
+                if (leagueResponse.countries[i].leagues) {
+                    for (var j = 0; j < leagueResponse.countries[i].leagues.length; j++) {
+                        if (leagueResponse.countries[i].leagues[j].id - parseInt(idLeague) === 0) {
+                            var url = leagueResponse.countries[i].leagues[j].pageUrl
+                            var first = url.slice(9)
+                            var index = first.indexOf("/")
+                            var id = first.slice(0, index)
+                            var second = first.slice(index, first.length)
+                            var name = second.slice(10, first.length)
+                            navigation.navigate(Navigator.leagueDetailRoute, { id: id, name: name } as RouteLeague)
+                            return
+                        }
+                    }
+                }
+            }
+        }
+
+    }, [leagueResponse])
 
     // action 
     function showDatepicker() {
@@ -47,6 +77,11 @@ const MatchPage = (props: any) => {
     }
     function onClickChooseMatch(id: number) {
         navigation.navigate(Navigator.matchDetailRoute, { matchId: id })
+    }
+
+    function _onClickLeague(id : string) {
+        dispatch(leagueAction({}))
+                setIdLeague(id)
     }
 
     //layout
@@ -70,6 +105,7 @@ const MatchPage = (props: any) => {
                 data={macthResponse !== undefined ? macthResponse.leagues : []}
                 renderItem={({ item, index }) => (
                     <ListMatchComponent
+                    onClickLeague={() => _onClickLeague(item.id)}
                         items={macthResponse.leagues !== undefined ? macthResponse.leagues[index].matches : []}
                         nameLeague={macthResponse.leagues[index].name}
                         onClick={onClickChooseMatch}
@@ -105,7 +141,8 @@ const MatchPage = (props: any) => {
 }
 const mapStateToProps = (state: any) => {
     return {
-        macthResponse: state.match.matchResponse
+        macthResponse: state.match.matchResponse,
+        leagueResponse: state.league.leagueResponse
     };
 };
 

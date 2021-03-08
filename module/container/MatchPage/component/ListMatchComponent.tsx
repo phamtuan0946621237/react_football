@@ -4,7 +4,8 @@ import {Image,StyleSheet, Text,TouchableOpacity, View} from 'react-native';
 interface ListMatchComponent {
   items :  Array<ListMatchesItem>,
   nameLeague ?: string,
-  onClick : (id : number) => void
+  onClick : (id : number) => void,
+  onClickLeague : () => void
 }
 
 interface ListMatchesItem {
@@ -53,12 +54,14 @@ const ListMatchComponent = (props: ListMatchComponent) => {
     props.onClick(index)
   }
 
+  
+
   // layout
   return (
     <View>
-      <View style={styles.section}>
-      <Text style={{color : 'black'}}>{props.nameLeague}</Text>
-      </View>
+      <TouchableOpacity style={styles.section} onPress={props.onClickLeague} activeOpacity={0.5}>
+      <Text  style={{color : 'black'}}>{props.nameLeague}</Text>
+      </TouchableOpacity>
       {props.items.map((item : ListMatchesItem,index : number) => {
         return (
           <View key={index}>
